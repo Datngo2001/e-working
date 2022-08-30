@@ -8,13 +8,13 @@ import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC-C_EejnYAoDo1QylOSKjYVoCTQvPtOgE",
-    authDomain: "myblog-747a3.firebaseapp.com",
-    projectId: "myblog-747a3",
-    storageBucket: "myblog-747a3.appspot.com",
-    messagingSenderId: "78050141069",
-    appId: "1:78050141069:web:fcc9748eab236bc71393c4",
-    measurementId: "G-SVJXQHFWNH"
+    apiKey: "AIzaSyCV9wUlrqUhZc4ODJoqT0yWppyymNM9VvQ",
+    authDomain: "e-working-ac680.firebaseapp.com",
+    projectId: "e-working-ac680",
+    storageBucket: "e-working-ac680.appspot.com",
+    messagingSenderId: "1052923549521",
+    appId: "1:1052923549521:web:bb26575ff84f1cff546570",
+    measurementId: "G-F1GWRJ2YR8"
 };
 
 // Initialize Firebase

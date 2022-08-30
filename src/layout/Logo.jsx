@@ -19,7 +19,7 @@ function Logo() {
           color: 'inherit',
           textDecoration: 'none'
         }}>
-        MyBlog
+        E-working
       </Typography>
 
       <Typography
@@ -37,7 +37,7 @@ function Logo() {
           color: 'inherit',
           textDecoration: 'none'
         }}>
-        MyBlog
+        E-working
       </Typography>
     </>
   );
