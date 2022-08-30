@@ -2,8 +2,6 @@
   "name": "e-working",
   "version": "1.0.0",
   "description": "",
-  "author": "",
-  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --mode development",
@@ -12,6 +10,8 @@
     "lint": "eslint \"src/**/*.{js,jsx}\""
   },
   "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
