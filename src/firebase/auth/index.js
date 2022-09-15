@@ -1,27 +1,45 @@
-import { getAuth, signInWithPopup, signInWithCustomToken, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, browserLocalPersistence, signInWithPopup, signInWithCustomToken, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence } from "firebase/auth";
+import { FirebaseApp } from "..";
+
+export const auth = getAuth(FirebaseApp)
 
 export function signInToFirebaseWithCustomToken(token) {
-    const auth = getAuth()
     return signInWithCustomToken(auth, token)
 }
 
 export function getFirebaseIdToken() {
-    const auth = getAuth()
     return auth.currentUser.getIdToken()
 }
 
-export function signInToFirebaseWithEmail(email, password) {
-    const auth = getAuth()
-    return signInWithEmailAndPassword(auth, email, password)
+export function getCurrentUser() {
+    return auth.currentUser
 }
 
-export function createUserWithEmail(email, password) {
-    const auth = getAuth()
-    return createUserWithEmailAndPassword(auth, email, password)
+export async function signInToFirebaseWithEmail(email, password) {
+    try {
+        await setPersistence(auth, browserLocalPersistence)
+        return signInWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export function signinWithGooglePopup() {
-    const auth = getAuth()
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
+export async function createUserWithEmail(email, password) {
+    try {
+        await setPersistence(auth, browserLocalPersistence)
+        return createUserWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function signinWithGooglePopup() {
+    try {
+        const auth = getAuth()
+        setPersistence(auth, browserLocalPersistence)
+        const provider = new GoogleAuthProvider();
+        return await signInWithPopup(auth, provider)
+    } catch (error) {
+        console.log(error)
+    }
 }
