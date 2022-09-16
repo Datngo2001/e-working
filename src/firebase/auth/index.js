@@ -1,4 +1,4 @@
-import { getAuth, browserLocalPersistence, signInWithPopup, signInWithCustomToken, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence } from "firebase/auth";
+import { getAuth, signOut, browserLocalPersistence, signInWithPopup, signInWithCustomToken, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence } from "firebase/auth";
 import { FirebaseApp } from "..";
 
 export const auth = getAuth(FirebaseApp)
@@ -35,11 +35,14 @@ export async function createUserWithEmail(email, password) {
 
 export async function signinWithGooglePopup() {
     try {
-        const auth = getAuth()
         setPersistence(auth, browserLocalPersistence)
         const provider = new GoogleAuthProvider();
         return await signInWithPopup(auth, provider)
     } catch (error) {
         console.log(error)
     }
+}
+
+export function signoutFirebase() {
+    return signOut(auth)
 }

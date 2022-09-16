@@ -2,11 +2,11 @@ import { Button, Container } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { LOGOUT } from '../../store/reducer/user/userActionTypes';
+import { SIGNOUT_REQUEST } from '../../store/reducer/user/userActionTypes';
 function Setting() {
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch({ type: LOGOUT });
+    dispatch({ type: SIGNOUT_REQUEST });
   };
   return (
     <div>

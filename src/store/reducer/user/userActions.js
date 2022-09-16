@@ -1,7 +1,6 @@
 import { call, put } from 'redux-saga/effects'
-// import { verifyIdToken } from '../../../api/auth'
-import { SIGNIN_FAILURE, SIGNIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAILURE } from './userActionTypes'
-import { createUserWithEmail, signInToFirebaseWithEmail, signinWithGooglePopup } from '../../../firebase/auth'
+import { SIGNIN_FAILURE, SIGNIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAILURE, SIGNOUT_SUCCESS, SIGNOUT_FAILURE } from './userActionTypes'
+import { signoutFirebase, createUserWithEmail, signInToFirebaseWithEmail, signinWithGooglePopup } from '../../../firebase/auth'
 
 export function* signin({ payload }) {
     try {
@@ -60,6 +59,20 @@ export function* register({ payload }) {
     } catch (error) {
         yield put({
             type: REGISTER_FAILURE,
+            payload: error
+        })
+    }
+}
+
+export function* signout() {
+    try {
+        yield call(signoutFirebase)
+        yield put({
+            type: SIGNOUT_SUCCESS,
+        })
+    } catch (error) {
+        yield put({
+            type: SIGNOUT_FAILURE,
             payload: error
         })
     }
