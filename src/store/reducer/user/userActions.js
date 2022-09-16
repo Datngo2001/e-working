@@ -9,9 +9,6 @@ export function* signin({ payload }) {
             type: SIGNIN_SUCCESS,
             payload: {
                 user: googleRes.user,
-                accessToken: googleRes.user.accessToken,
-                idToken: googleRes._tokenResponse.idToken,
-                refreshToken: googleRes._tokenResponse.refreshToken
             }
         })
     } catch (error) {
@@ -26,17 +23,22 @@ export function* signin({ payload }) {
 export function* signinWithGoogle() {
     try {
         const googleRes = yield call(signinWithGooglePopup)
+
+        if (!googleRes) {
+            yield put({
+                type: SIGNIN_FAILURE,
+                payload: { message: "Please select your google account" }
+            })
+            return;
+        }
+
         yield put({
             type: SIGNIN_SUCCESS,
             payload: {
                 user: googleRes.user,
-                accessToken: googleRes.user.accessToken,
-                idToken: googleRes._tokenResponse.idToken,
-                refreshToken: googleRes._tokenResponse.refreshToken
             }
         })
     } catch (error) {
-        console.log(error)
         yield put({
             type: SIGNIN_FAILURE,
             payload: error
@@ -51,9 +53,6 @@ export function* register({ payload }) {
             type: REGISTER_SUCCESS,
             payload: {
                 user: googleRes.user,
-                accessToken: googleRes.user.accessToken,
-                idToken: googleRes._tokenResponse.idToken,
-                refreshToken: googleRes._tokenResponse.refreshToken
             }
         })
     } catch (error) {
