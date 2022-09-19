@@ -1,14 +1,19 @@
 import React from 'react';
+import ConsoleRoute from '../../routes/ConsoleRoute';
 import Footer from '../components/Footer/Footer';
-import Navbar from '../components/Navbar';
+import SideBar from './components/SideBar/SideBar';
 import styles from './consoleLayout.module.css';
+import ConsoleAppBar from './components/ConsoleAppbar/ConsoleAppbar';
 
 function ConsoleLayout() {
   return (
-    <div>
-      <Navbar />
-      <div className={styles['app-route-container']}>
-        <h1>This console</h1>
+    <div className={styles['container']}>
+      <ConsoleAppBar />
+      <div className={styles['body-container']}>
+        <SideBar />
+        <div className={styles['route-container']}>
+          <ConsoleRoute />
+        </div>
       </div>
       <Footer />
     </div>

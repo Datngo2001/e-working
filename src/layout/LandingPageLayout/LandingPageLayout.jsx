@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from './components/Navbar';
 import Footer from '../components/Footer/Footer';
 import LandingPageRoute from '../../routes/LandingPageRoute';
 import styles from './landingPageLayout.module.css';

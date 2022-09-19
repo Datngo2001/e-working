@@ -2,10 +2,10 @@ import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { AppBar, Button } from '@mui/material';
-import MenuButton from './MenuButton';
-import LinkGroup from './LinkGroup';
-import UserMenu from './UserMenu';
-import Logo from './Logo';
+import MenuButton from '../../components/MenuButton';
+import LinkGroup from '../../components/LinkGroup';
+import UserMenu from '../../components/UserMenu';
+import Logo from '../../components/Logo';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
