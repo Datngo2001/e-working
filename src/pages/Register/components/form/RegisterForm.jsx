@@ -1,7 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useState } from 'react';
-import PasswordTextFeild from '../PasswordTextFeild';
+import PasswordTextFeild from '../../../../components/PasswordTextFeild';
 
 function RegisterForm({ handleSubmit, isLoading, submitError }) {
   const [inputs, setInputs] = useState({

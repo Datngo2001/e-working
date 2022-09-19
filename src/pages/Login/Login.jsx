@@ -3,7 +3,7 @@ import { Stack } from '@mui/system';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
-import LoginForm from '../../components/form/LoginForm';
+import LoginForm from './components/form/LoginForm';
 import { SIGNIN_GOOGLE_REQUEST, SIGNIN_REQUEST } from '../../store/reducer/user/userActionTypes';
 import styles from './login.module.css';
 
