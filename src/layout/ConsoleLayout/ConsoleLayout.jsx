@@ -10,7 +10,9 @@ function ConsoleLayout() {
     <div className={styles['container']}>
       <ConsoleAppBar />
       <div className={styles['body-container']}>
-        <SideBar />
+        <div className={styles['sidebar-container']}>
+          <SideBar />
+        </div>
         <div className={styles['route-container']}>
           <ConsoleRoute />
         </div>
