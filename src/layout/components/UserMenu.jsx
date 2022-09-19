@@ -28,7 +28,7 @@ function UserMenu({ items }) {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="avatar" src={user?.avatar} />
+          <Avatar alt="avatar" src={user?.photoURL} />
         </IconButton>
       </Tooltip>
       <Menu

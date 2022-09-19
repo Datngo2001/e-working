@@ -7,3 +7,7 @@ export function login(payload) {
 export function register(payload) {
   return api.post("auth/register", payload);
 }
+
+export function verifyIdToken(token) {
+  return api.post("auth/verify-google-id-token", { token });
+}

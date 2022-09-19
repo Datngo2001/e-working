@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RESTORE_USER } from './store/reducer/user/userActionTypes';
 import './App.css';
-import Cookies from 'universal-cookie';
 import { Route, Routes } from 'react-router';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home/Home';
@@ -12,20 +11,18 @@ import Profile from './pages/Profile/Profile';
 import Setting from './pages/Setting/Setting';
 import Navbar from './layout/Navbar';
 import Footer from './pages/Footer/Footer';
-
-const cookies = new Cookies();
+import { auth } from './firebase/auth';
+import { useEffect } from 'react';
 
 const App = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  if (!user) {
-    const prevUser = cookies.get('user');
-    const prevToken = cookies.get('token');
-    if (prevUser && prevToken) {
-      dispatch({ type: RESTORE_USER, payload: prevUser });
-    }
-  }
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      dispatch({ type: RESTORE_USER, payload: user });
+    });
+  }, [dispatch]);
 
   return (
     <div>

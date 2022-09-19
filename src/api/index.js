@@ -5,7 +5,7 @@ import { API_URL } from "../config";
 const cookies = new Cookies();
 
 function getToken() {
-    const token = cookies.get("token");
+    const token = cookies.get("idToken");
 
     return token ? `Bearer ${token}` : null;
 }
