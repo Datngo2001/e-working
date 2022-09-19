@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
 
-function Profile() {
+function ProfilePage() {
   return (
     <Container maxWidth="sm">
       <Stack spacing={2} sx={{ marginTop: 4 }}></Stack>
@@ -10,4 +10,4 @@ function Profile() {
   );
 }
 
-export default React.memo(Profile);
+export default React.memo(ProfilePage);

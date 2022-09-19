@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './register.module.css';
-import RegisterForm from '../../components/form/RegisterForm';
+import RegisterForm from './components/form/RegisterForm';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER_REQUEST } from '../../store/reducer/user/userActionTypes';
 
-function Register() {
+function RegisterPage() {
   const { user, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -33,4 +33,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterPage;
