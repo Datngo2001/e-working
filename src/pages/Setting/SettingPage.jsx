@@ -3,7 +3,7 @@ import { Stack } from '@mui/system';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { SIGNOUT_REQUEST } from '../../store/reducer/user/userActionTypes';
-function Setting() {
+function SettingPage() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch({ type: SIGNOUT_REQUEST });
@@ -21,4 +21,4 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default SettingPage;

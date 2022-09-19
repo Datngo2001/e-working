@@ -1,8 +1,8 @@
 import { Container } from '@mui/system';
 import React from 'react';
 
-function Home() {
+function HomePage() {
   return <Container maxWidth="sm" sx={{ paddingTop: 5 }}></Container>;
 }
 
-export default Home;
+export default HomePage;

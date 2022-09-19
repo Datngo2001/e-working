@@ -7,7 +7,7 @@ import LoginForm from './components/form/LoginForm';
 import { SIGNIN_GOOGLE_REQUEST, SIGNIN_REQUEST } from '../../store/reducer/user/userActionTypes';
 import styles from './login.module.css';
 
-function Login() {
+function LoginPage() {
   const { user, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   if (user) {
@@ -41,4 +41,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
