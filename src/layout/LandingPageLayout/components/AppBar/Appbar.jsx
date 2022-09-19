@@ -2,14 +2,15 @@ import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { AppBar, Button } from '@mui/material';
-import MenuButton from '../../components/MenuButton';
-import LinkGroup from '../../components/LinkGroup';
-import UserMenu from '../../components/UserMenu';
-import Logo from '../../components/Logo';
+import LinkGroup from '../LinkGroup';
+import UserMenu from '../../../components/UserMenu';
+import Logo from '../../../components/Logo';
+import MenuButton from '../../../components/MenuButton';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import styles from './appbar.module.css';
 
-function Navbar() {
+function Appbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const pages = [
@@ -29,6 +30,10 @@ function Navbar() {
     }
   ];
 
+  const gotoConsole = () => {
+    navigate('/console');
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="lg">
@@ -38,8 +43,14 @@ function Navbar() {
           <Logo></Logo>
 
           <LinkGroup pages={pages}></LinkGroup>
+
           {user ? (
-            <UserMenu items={userPages}></UserMenu>
+            <div className={styles['left-group-container']}>
+              <Button color="inherit" variant="outlined" onClick={gotoConsole}>
+                Go to Console
+              </Button>
+              <UserMenu items={userPages}></UserMenu>
+            </div>
           ) : (
             <Button variant="outlined" color="inherit" onClick={() => navigate('/login')}>
               Login
@@ -51,4 +62,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Appbar;

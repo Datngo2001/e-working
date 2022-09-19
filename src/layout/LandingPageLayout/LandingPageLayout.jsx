@@ -1,13 +1,13 @@
 import React from 'react';
-import Navbar from './components/Navbar';
 import Footer from '../components/Footer/Footer';
 import LandingPageRoute from '../../routes/LandingPageRoute';
 import styles from './landingPageLayout.module.css';
+import Appbar from './components/AppBar/Appbar';
 
 function LandingPageLayout() {
   return (
     <div>
-      <Navbar />
+      <Appbar />
       <div className={styles['app-route-container']}>
         <LandingPageRoute />
       </div>

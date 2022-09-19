@@ -1,13 +1,13 @@
 import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
 import { AppBar, Button } from '@mui/material';
 import MenuButton from '../../../components/MenuButton';
-import LinkGroup from '../../../components/LinkGroup';
 import UserMenu from '../../../components/UserMenu';
 import Logo from '../../../components/Logo';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { Box } from '@mui/system';
+import styles from './consoleAppbar.module.css';
 
 function ConsoleAppbar() {
   const navigate = useNavigate();
@@ -31,13 +31,14 @@ function ConsoleAppbar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="">
+      <div className={styles['container']}>
         <Toolbar disableGutters>
           <MenuButton pages={pages}></MenuButton>
 
           <Logo></Logo>
 
-          <LinkGroup pages={pages}></LinkGroup>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
+
           {user ? (
             <UserMenu items={userPages}></UserMenu>
           ) : (
@@ -46,7 +47,7 @@ function ConsoleAppbar() {
             </Button>
           )}
         </Toolbar>
-      </Container>
+      </div>
     </AppBar>
   );
 }
