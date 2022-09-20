@@ -1,0 +1,11 @@
+.container{
+    padding: 30px 50px;
+}
+h2{
+    margin-bottom: 30px;
+}
+.project-card-container{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto auto;
+}

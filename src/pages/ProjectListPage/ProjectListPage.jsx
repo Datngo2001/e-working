@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectList from '../../features/CreateProject/ProjectList';
+import ProjectList from '../../features/ProjectList/ProjectList';
 import styles from './projectListPage.module.css';
 function ProjectListPage() {
   return (
