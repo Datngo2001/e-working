@@ -43,6 +43,6 @@ export default function projectReducer(state = init, { type, payload }) {
                 }
             }
         default:
-            break;
+            return state
     }
 }
