@@ -1,5 +1,6 @@
 .container{
     padding: 30px 50px;
+    overflow: auto;
 }
 h2{
     margin-bottom: 30px;
