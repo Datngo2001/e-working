@@ -11,7 +11,7 @@ import ConsoleLayout from './layout/ConsoleLayout/ConsoleLayout';
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log('render');
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       dispatch({ type: RESTORE_USER, payload: user });

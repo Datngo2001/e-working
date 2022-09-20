@@ -1,11 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
-import LandingPageRoute from './LandingPageRoute';
+import ProjectList from '../pages/ProjectListPage/ProjectListPage';
 
 function ConsoleRoute() {
   return (
     <>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/console">
+          <Route path="" element={<ProjectList />} />
+        </Route>
+      </Routes>
     </>
   );
 }
