@@ -13,8 +13,9 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      dispatch({ type: RESTORE_USER, payload: user });
+    auth.onAuthStateChanged(async (user) => {
+      const idToken = await auth.currentUser?.getIdToken();
+      dispatch({ type: RESTORE_USER, payload: { user, idToken } });
     });
   }, [dispatch]);
 

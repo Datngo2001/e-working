@@ -9,6 +9,7 @@ export function* signin({ payload }) {
             type: SIGNIN_SUCCESS,
             payload: {
                 user: googleRes.user,
+                idToken: googleRes._tokenResponse.idToken
             }
         })
     } catch (error) {
@@ -35,6 +36,7 @@ export function* signinWithGoogle() {
             type: SIGNIN_SUCCESS,
             payload: {
                 user: googleRes.user,
+                idToken: googleRes._tokenResponse.idToken
             }
         })
     } catch (error) {
@@ -52,6 +54,7 @@ export function* register({ payload }) {
             type: REGISTER_SUCCESS,
             payload: {
                 user: googleRes.user,
+                idToken: googleRes._tokenResponse.idToken
             }
         })
     } catch (error) {
