@@ -1,12 +1,10 @@
 import axios from "axios";
-import Cookies from 'universal-cookie';
 import { API_URL } from "../config";
-
-const cookies = new Cookies();
+import store from "../store";
 
 function getToken() {
-    const token = cookies.get("idToken");
-
+    const token = store.getState().user.idToken;
+    console.log(token)
     return token ? `Bearer ${token}` : null;
 }
 

@@ -3,26 +3,27 @@ import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, RESTORE_USER, SIG
 const init = {
     user: null,
     loading: false,
+    idToken: null,
     error: { signin: null, register: null }
 }
 
 export default function userReducer(state = init, { type, payload }) {
     switch (type) {
         case RESTORE_USER:
-            return { loading: false, user: payload, error: { signin: null, register: null } };
+            return { ...state, loading: false, user: payload.user, idToken: payload.idToken, error: { signin: null, register: null } };
         case SIGNIN_GOOGLE_REQUEST:
         case SIGNIN_REQUEST:
         case REGISTER_REQUEST:
-            return { loading: true, user: null, error: { signin: null, register: null } };
+            return { ...state, loading: true, user: null, error: { signin: null, register: null } };
         case SIGNIN_FAILURE:
-            return { loading: false, user: null, error: { ...state.error, signin: payload } };
+            return { ...state, loading: false, user: null, error: { ...state.error, signin: payload } };
         case REGISTER_FAILURE:
-            return { loading: false, user: null, error: { ...state.error, register: payload } };
+            return { ...state, loading: false, user: null, error: { ...state.error, register: payload } };
         case SIGNIN_SUCCESS:
         case REGISTER_SUCCESS:
-            return { loading: false, user: payload.user, error: { signin: null, register: null } };
+            return { ...state, loading: false, user: payload.user, idToken: payload.idToken, error: { signin: null, register: null } };
         case SIGNOUT_SUCCESS:
-            return { loading: null, user: null, error: { signin: null, register: null } };
+            return { ...state, loading: null, user: null, idToken: null, error: { signin: null, register: null } };
         default:
             return state;
     }
