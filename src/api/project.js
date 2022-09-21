@@ -1,5 +1,9 @@
 import api from "./";
 
 export function postProject(data) {
-    api.post("/project", data)
+    return api.post("/project", data)
+}
+
+export function getMyProject() {
+    return api.get("/project/my/all")
 }

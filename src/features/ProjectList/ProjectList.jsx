@@ -1,22 +1,17 @@
 import { Grid } from '@mui/material';
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MY_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
 import CreateProjectModal from '../CreateProject/CreateProjectModal';
 import CreateProjectButton from './components/CreateProjectButton/CreateProjectButton';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 import styles from './projectList.module.css';
 
-const list = [
-  { name: 'E-working' },
-  { name: 'E-working' },
-  { name: 'E-working' },
-  { name: 'E-working' },
-  { name: 'E-working' },
-  { name: 'E-working' },
-  { name: 'E-working' }
-];
-
 function ProjectList() {
+  const { projectList } = useSelector((state) => state.project);
+  const dispatch = useDispatch();
   const [isShowModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -27,6 +22,12 @@ function ProjectList() {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    dispatch({
+      type: MY_PROJECT_REQUEST
+    });
+  }, [dispatch]);
+
   return (
     <div className={styles['container']}>
       <h2>Your Project</h2>
@@ -34,7 +35,7 @@ function ProjectList() {
         <Grid item xs={12} md={6} lg={4} onClick={openModal}>
           <CreateProjectButton />
         </Grid>
-        {list.map((project, index) => (
+        {projectList.map((project, index) => (
           <Grid item xs={12} md={6} lg={4} key={index}>
             <ProjectCard name={project.name} />
           </Grid>

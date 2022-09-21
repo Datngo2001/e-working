@@ -25,7 +25,8 @@
             "off",
             "double"
         ],
-        "react/prop-types":["off"]
+        "react/prop-types":["off"],
+        "react-hooks/exhaustive-deps": "off"
     },
     "settings": {
         "react": {
