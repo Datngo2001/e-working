@@ -4,7 +4,6 @@ import store from "../store";
 
 function getToken() {
     const token = store.getState().user.idToken;
-    console.log(token)
     return token ? `Bearer ${token}` : null;
 }
 
