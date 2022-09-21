@@ -6,7 +6,7 @@ function CreateProjectModal({ isOpen, closeModal }) {
   return (
     <BaseFullScreenModal isOpen={isOpen} closeModal={closeModal}>
       <div className={styles['modal-container']}>
-        <CreateProjectForm />
+        <CreateProjectForm onProjectCreated={() => closeModal()} />
       </div>
     </BaseFullScreenModal>
   );

@@ -1,16 +1,21 @@
 import { Button, TextField } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CREATE_PROJECT_REQUEST } from '../../../../store/reducer/project/projectActionTypes';
 import styles from './createProjectForm.module.css';
 
-function CreateProjectForm() {
-  const { loading } = useSelector((state) => state.project);
+function CreateProjectForm({ onProjectCreated }) {
+  const { loading, error } = useSelector((state) => state.project);
   const dispatch = useDispatch();
+  const isSubmited = useRef(false);
   const [inputs, setInputs] = useState({
-    name: ''
+    name: '',
+    admins: [],
+    members: []
   });
 
   const handleChange = (event) => {
@@ -21,11 +26,27 @@ function CreateProjectForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    isSubmited.current = true;
     dispatch({
       type: CREATE_PROJECT_REQUEST,
       payload: inputs
     });
   };
+
+  const isSuccess = () => {
+    console.log(isSubmited.current);
+    console.log(error);
+    if (isSubmited.current && error && error.action !== CREATE_PROJECT_REQUEST) {
+      return false;
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      onProjectCreated();
+    }
+  }, [error]);
 
   return (
     <form onSubmit={handleSubmit}>
