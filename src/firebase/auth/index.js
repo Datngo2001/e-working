@@ -1,14 +1,11 @@
-import { getAuth, signOut, browserLocalPersistence, signInWithPopup, signInWithCustomToken, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence } from "firebase/auth";
+import { getAuth, signOut, browserLocalPersistence, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence } from "firebase/auth";
 import { FirebaseApp } from "..";
 
 export const auth = getAuth(FirebaseApp)
 
-export function signInToFirebaseWithCustomToken(token) {
-    return signInWithCustomToken(auth, token)
-}
 
-export function getFirebaseIdToken() {
-    return auth.currentUser.getIdToken()
+export async function getFirebaseIdToken() {
+    return await auth.currentUser?.getIdToken()
 }
 
 export function getCurrentUser() {

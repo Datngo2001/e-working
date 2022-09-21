@@ -2,12 +2,18 @@ import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/ma
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGNOUT_REQUEST } from '../../store/reducer/user/userActionTypes';
 
-function UserMenu({ items }) {
+function UserMenu() {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch({ type: SIGNOUT_REQUEST });
+  };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -15,13 +21,6 @@ function UserMenu({ items }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const handleMenuClick = (link) => {
-    return () => {
-      setAnchorElUser(null);
-      navigate(link);
-    };
   };
 
   return (
@@ -46,11 +45,12 @@ function UserMenu({ items }) {
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}>
-        {items.map((item) => (
-          <MenuItem key={item.title} onClick={handleMenuClick(item.link)}>
-            <Typography textAlign="center">{item.title}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={() => navigate('/profile')}>
+          <Typography textAlign="center">Profile</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <Typography textAlign="center">Logout</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );
