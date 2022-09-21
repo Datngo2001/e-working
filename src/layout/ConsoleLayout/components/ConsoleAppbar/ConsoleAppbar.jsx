@@ -1,31 +1,20 @@
 import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
-import { AppBar, Button } from '@mui/material';
+import { AppBar } from '@mui/material';
 import MenuButton from '../../../components/MenuButton';
 import UserMenu from '../../../components/UserMenu';
 import Logo from '../../../components/Logo';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { Box } from '@mui/system';
+import CircularProgress from '@mui/material/CircularProgress';
 import styles from './consoleAppbar.module.css';
 
 function ConsoleAppbar() {
-  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const pages = [
     {
       title: 'Home',
       link: '/'
-    }
-  ];
-  const userPages = [
-    {
-      title: 'Profile',
-      link: `/profile/${user?._id}`
-    },
-    {
-      title: 'Setting',
-      link: '/setting'
     }
   ];
 
@@ -39,13 +28,7 @@ function ConsoleAppbar() {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
 
-          {user ? (
-            <UserMenu items={userPages}></UserMenu>
-          ) : (
-            <Button variant="outlined" color="inherit" onClick={() => navigate('/login')}>
-              Login
-            </Button>
-          )}
+          {user ? <UserMenu /> : <CircularProgress color="inherit" />}
         </Toolbar>
       </div>
     </AppBar>
