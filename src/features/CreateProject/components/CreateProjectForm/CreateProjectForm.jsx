@@ -2,11 +2,13 @@ import { Button, TextField } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CREATE_PROJECT_REQUEST } from '../../../../store/reducer/project/projectActionTypes';
 import styles from './createProjectForm.module.css';
 
 function CreateProjectForm() {
   const { loading } = useSelector((state) => state.project);
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     name: ''
   });
@@ -19,6 +21,10 @@ function CreateProjectForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch({
+      type: CREATE_PROJECT_REQUEST,
+      payload: inputs
+    });
   };
 
   return (
