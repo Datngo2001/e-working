@@ -1,0 +1,44 @@
+import { Button, TextField } from '@mui/material';
+import { Stack } from '@mui/system';
+import React from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import styles from './createProjectForm.module.css';
+
+function CreateProjectForm() {
+  const { loading } = useSelector((state) => state.project);
+  const [inputs, setInputs] = useState({
+    name: ''
+  });
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Stack spacing={2}>
+        <TextField
+          name="name"
+          type="text"
+          value={inputs.name || ''}
+          label="Your project name"
+          variant="outlined"
+          onChange={handleChange}></TextField>
+        <div className={styles['submit-container']}>
+          <Button type="submit" variant="contained" disabled={loading}>
+            Create
+          </Button>
+        </div>
+      </Stack>
+    </form>
+  );
+}
+
+export default CreateProjectForm;
