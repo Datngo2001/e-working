@@ -13,7 +13,6 @@ export function* signin({ payload }) {
             }
         })
     } catch (error) {
-        console.log(error)
         yield put({
             type: SIGNIN_FAILURE,
             payload: error
