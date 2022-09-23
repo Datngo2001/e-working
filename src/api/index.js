@@ -16,7 +16,6 @@ api.interceptors.request.use(
         if (!config.headers.Authorization) {
             config.headers.Authorization = getToken();
         }
-        console.log(config.headers.Authorization)
         return config;
     },
     function (error) {

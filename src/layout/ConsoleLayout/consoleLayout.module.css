@@ -10,10 +10,10 @@
     overflow: auto;
 }
 .sidebar-container{
-    flex-grow: 1;
+    flex-basis: 300px;
     overflow: auto;
 }
 .route-container{
-    flex-grow: 5;
+    flex-grow: 1;
     overflow: auto;
 }
