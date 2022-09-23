@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { MY_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
 import CreateProjectModal from '../CreateProject/CreateProjectModal';
 import CreateProjectButton from './components/CreateProjectButton/CreateProjectButton';
@@ -13,6 +14,7 @@ function ProjectList() {
   const { projectList } = useSelector((state) => state.project);
   const dispatch = useDispatch();
   const [isShowModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
@@ -36,7 +38,13 @@ function ProjectList() {
           <CreateProjectButton />
         </Grid>
         {projectList.map((project, index) => (
-          <Grid item xs={12} md={6} lg={4} key={index}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            lg={4}
+            key={index}
+            onClick={() => navigate(`/console/project/${project._id}/stage`)}>
             <ProjectCard name={project.name} />
           </Grid>
         ))}
