@@ -13,7 +13,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
     function (config) {
-        config.headers.authorization = getToken();
+        if (!config.headers.Authorization) {
+            config.headers.Authorization = getToken();
+        }
+        console.log(config.headers.Authorization)
         return config;
     },
     function (error) {
