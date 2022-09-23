@@ -1,4 +1,4 @@
-import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, RESTORE_USER_FAILURE, RESTORE_USER_REQUEST, RESTORE_USER_SUCCESS, SIGNIN_FAILURE, SIGNIN_GOOGLE_REQUEST, SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNOUT_SUCCESS } from "./userActionTypes";
+import { HANDLE_AUTH_STATE_CHANGE_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, SIGNIN_FAILURE, SIGNIN_GOOGLE_REQUEST, SIGNIN_REQUEST } from "./userActionTypes";
 
 const init = {
     user: null,
@@ -12,7 +12,6 @@ const init = {
 
 export default function userReducer(state = init, { type, payload }) {
     switch (type) {
-        case RESTORE_USER_REQUEST:
         case SIGNIN_GOOGLE_REQUEST:
         case SIGNIN_REQUEST:
         case REGISTER_REQUEST:
@@ -25,7 +24,6 @@ export default function userReducer(state = init, { type, payload }) {
                     message: null
                 }
             };
-        case RESTORE_USER_FAILURE:
         case REGISTER_FAILURE:
         case SIGNIN_FAILURE:
             return {
@@ -37,25 +35,12 @@ export default function userReducer(state = init, { type, payload }) {
                     message: payload
                 }
             };
-        case SIGNIN_SUCCESS:
-        case REGISTER_SUCCESS:
-        case RESTORE_USER_SUCCESS:
+        case HANDLE_AUTH_STATE_CHANGE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 user: payload.user,
                 idToken: payload.idToken,
-                error: {
-                    action: "",
-                    message: null
-                }
-            };
-        case SIGNOUT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                user: null,
-                idToken: null,
                 error: {
                     action: "",
                     message: null

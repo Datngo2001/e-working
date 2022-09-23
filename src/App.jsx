@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { RESTORE_USER_FAILURE, RESTORE_USER_REQUEST } from './store/reducer/user/userActionTypes';
+import { HANDLE_AUTH_STATE_CHANGE_REQUEST } from './store/reducer/user/userActionTypes';
 import './App.css';
 import { auth } from './firebase/auth';
 import { useEffect } from 'react';
@@ -14,14 +14,10 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    auth.onIdTokenChanged((user) => {
-      if (user) {
-        dispatch({ type: RESTORE_USER_REQUEST });
-      } else {
-        dispatch({ type: RESTORE_USER_FAILURE });
-        if (location.pathname.includes('/console')) {
-          navigate('/');
-        }
+    auth.onIdTokenChanged((currentUser) => {
+      dispatch({ type: HANDLE_AUTH_STATE_CHANGE_REQUEST });
+      if (!currentUser && location.pathname.includes('/console')) {
+        navigate('/');
       }
     });
   }, [dispatch]);

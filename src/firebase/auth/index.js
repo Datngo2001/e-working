@@ -32,7 +32,7 @@ export async function createUserWithEmail(email, password) {
 
 export async function signinWithGooglePopup() {
     try {
-        setPersistence(auth, browserLocalPersistence)
+        await setPersistence(auth, browserLocalPersistence)
         const provider = new GoogleAuthProvider();
         return await signInWithPopup(auth, provider)
     } catch (error) {
