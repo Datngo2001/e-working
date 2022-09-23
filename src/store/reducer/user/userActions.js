@@ -1,10 +1,12 @@
 import { call, put } from 'redux-saga/effects'
 import { SIGNIN_FAILURE, SIGNIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAILURE, SIGNOUT_SUCCESS, SIGNOUT_FAILURE, RESTORE_USER_SUCCESS, RESTORE_USER_FAILURE } from './userActionTypes'
 import { signoutFirebase, createUserWithEmail, signInToFirebaseWithEmail, signinWithGooglePopup, getFirebaseIdToken, getCurrentUser } from '../../../firebase/auth'
+import { syncUser } from '../../../api/user'
 
 export function* signin({ payload }) {
     try {
         const googleRes = yield call(signInToFirebaseWithEmail, payload.email, payload.password)
+        yield call(syncUser, googleRes._tokenResponse.idToken)
         yield put({
             type: SIGNIN_SUCCESS,
             payload: {
@@ -23,6 +25,7 @@ export function* signin({ payload }) {
 export function* signinWithGoogle() {
     try {
         const googleRes = yield call(signinWithGooglePopup)
+        yield call(syncUser, googleRes._tokenResponse.idToken)
 
         if (!googleRes) {
             yield put({
@@ -50,6 +53,8 @@ export function* signinWithGoogle() {
 export function* register({ payload }) {
     try {
         const googleRes = yield call(createUserWithEmail, payload.email, payload.password)
+        yield call(syncUser, googleRes._tokenResponse.idToken)
+
         yield put({
             type: REGISTER_SUCCESS,
             payload: {
@@ -83,6 +88,8 @@ export function* restore() {
     try {
         const user = getCurrentUser()
         const idToken = yield call(getFirebaseIdToken)
+        yield call(syncUser, idToken)
+
         yield put({
             type: RESTORE_USER_SUCCESS,
             payload: {

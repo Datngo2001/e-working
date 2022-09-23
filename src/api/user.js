@@ -1,4 +1,5 @@
 import api from "./";
+import store from '../store'
 
 export function getProfile(id) {
     return api.get(`user/${id}`);
@@ -10,4 +11,10 @@ export function putProfile(data) {
 
 export function register(payload) {
     return api.post("auth/register", payload);
+}
+
+export function syncUser(token) {
+    return api.post("/user/sync-with-firebase", null, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
 }

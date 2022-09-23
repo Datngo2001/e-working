@@ -19,14 +19,16 @@ const App = () => {
         dispatch({ type: RESTORE_USER_REQUEST });
       } else {
         dispatch({ type: RESTORE_USER_FAILURE });
-        if (location.pathname == '/console') {
+        if (location.pathname.includes('/console')) {
           navigate('/');
         }
       }
     });
   }, [dispatch]);
 
-  return <div>{location.pathname == '/console' ? <ConsoleLayout /> : <LandingPageLayout />}</div>;
+  return (
+    <div>{location.pathname.includes('/console') ? <ConsoleLayout /> : <LandingPageLayout />}</div>
+  );
 };
 
 export default App;
