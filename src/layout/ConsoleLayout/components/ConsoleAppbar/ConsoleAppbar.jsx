@@ -24,7 +24,7 @@ function ConsoleAppbar() {
         <Toolbar disableGutters>
           <MenuButton pages={pages}></MenuButton>
 
-          <Logo></Logo>
+          <Logo navlink={'/console'}></Logo>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
 

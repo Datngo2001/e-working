@@ -34,7 +34,6 @@ export default function projectReducer(state = init, { type, payload }) {
                 }
             }
         case CREATE_PROJECT_SUCCESS:
-            console.log(payload)
             return {
                 ...state,
                 newProject: null,

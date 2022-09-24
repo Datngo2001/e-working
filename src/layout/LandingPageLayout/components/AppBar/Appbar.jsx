@@ -31,7 +31,7 @@ function Appbar() {
         <Toolbar disableGutters>
           <MenuButton pages={pages}></MenuButton>
 
-          <Logo></Logo>
+          <Logo navlink={'/'}></Logo>
 
           <LinkGroup pages={pages}></LinkGroup>
           <div className={styles['left-group-container']}>
