@@ -7,3 +7,7 @@ export function postProject(data) {
 export function getMyProject() {
     return api.get("/project/my/all")
 }
+
+export function getProjectById(id) {
+    return api.get(`/project/${id}`)
+}
