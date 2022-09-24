@@ -1,15 +1,17 @@
 import { Typography } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 // responsive logo
-function Logo() {
+function Logo({ navlink }) {
+  const navigate = useNavigate();
   return (
     <>
       <Typography
         variant="h6"
         noWrap
         component="a"
-        href="/"
+        onClick={() => navigate(navlink)}
         sx={{
           mr: 2,
           display: { xs: 'none', md: 'flex' },
@@ -17,7 +19,8 @@ function Logo() {
           fontWeight: 700,
           letterSpacing: '.3rem',
           color: 'inherit',
-          textDecoration: 'none'
+          textDecoration: 'none',
+          cursor: 'pointer'
         }}>
         E-working
       </Typography>
@@ -26,7 +29,7 @@ function Logo() {
         variant="h5"
         noWrap
         component="a"
-        href=""
+        onClick={() => navigate(navlink)}
         sx={{
           mr: 2,
           display: { xs: 'flex', md: 'none' },
@@ -35,7 +38,8 @@ function Logo() {
           fontWeight: 700,
           letterSpacing: '.3rem',
           color: 'inherit',
-          textDecoration: 'none'
+          textDecoration: 'none',
+          cursor: 'pointer'
         }}>
         E-working
       </Typography>
