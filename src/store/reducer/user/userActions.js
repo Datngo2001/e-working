@@ -45,9 +45,10 @@ export function* register({ payload }) {
     }
 }
 
-export function* signout() {
+export function* signout({ payload }) {
     try {
         yield call(signoutFirebase)
+        payload.success()
     } catch (error) {
         yield put({
             type: SIGNOUT_FAILURE,
