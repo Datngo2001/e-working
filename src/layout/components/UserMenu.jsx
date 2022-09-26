@@ -12,7 +12,14 @@ function UserMenu() {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch({ type: SIGNOUT_REQUEST });
+    dispatch({
+      type: SIGNOUT_REQUEST,
+      payload: {
+        success: () => {
+          navigate('/');
+        }
+      }
+    });
   };
 
   const handleOpenUserMenu = (event) => {
