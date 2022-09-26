@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { LOAD_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
+import GanttChart from '../../features/ProjectStage/GanttChart';
 
 function ProjectStagePage() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ function ProjectStagePage() {
 
   return (
     <div>
-      <h1>Project Stage</h1>
+      <GanttChart projectId={id} />
     </div>
   );
 }
