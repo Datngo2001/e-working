@@ -2,31 +2,33 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import StageDate from './components/StageDate/StageDate';
 import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
+import { dateDiffInDays } from '../../util/date';
 import styles from './ganttChart.module.css';
 
 function GanttChart() {
-  const { currentProject } = useSelector((state) => state.project);
-  const dispatch = useDispatch();
   let projectStartDate;
   let projectEndDate;
   let totalDate;
+
+  const { currentProject } = useSelector((state) => state.project);
+  const dispatch = useDispatch();
   const { stages } = useSelector((state) => state.stage);
 
-  projectStartDate = new Date(stages[0]?.startDate);
+  projectStartDate = stages[0]?.startDate;
   stages.forEach((stage) => {
-    if (new Date(stage.startDate) < projectStartDate) {
+    if (stage.startDate < projectStartDate) {
       projectStartDate = stage.startDate;
     }
   });
 
-  projectEndDate = new Date(stages[0]?.endDate);
+  projectEndDate = stages[0]?.endDate;
   stages.forEach((stage) => {
-    if (new Date(stage.endDate) > projectEndDate) {
+    if (stage.endDate > projectEndDate) {
       projectEndDate = stage.endDate;
     }
   });
 
-  totalDate = Math.round((projectEndDate - projectStartDate) / (1000 * 60 * 60 * 24));
+  totalDate = dateDiffInDays(projectEndDate, projectStartDate);
 
   useEffect(() => {
     if (currentProject) {
@@ -40,7 +42,8 @@ function GanttChart() {
         style={{
           display: 'grid',
           gridTemplateRows: '30px',
-          gridTemplateColumns: `repeat(${totalDate}, 20px )`
+          gridTemplateColumns: `repeat(${totalDate}, 20px )`,
+          overflow: 'auto'
         }}>
         {stages.map((stage, index) => (
           <StageDate

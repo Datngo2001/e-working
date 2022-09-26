@@ -1,16 +1,15 @@
 import React from 'react';
+import { dateDiffInDays } from '../../../../util/date';
 
 function StageDate({ stage, projectStartDate, order }) {
-  const startDate = new Date(stage.startDate);
-  const endDate = new Date(stage.endDate);
-  const gridStartColumn = Math.round((startDate - projectStartDate) / (1000 * 60 * 60 * 24)) + 1;
-  const totalDate = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
-  console.log(gridStartColumn);
+  const gridStartColumn = dateDiffInDays(projectStartDate, stage.startDate) + 1;
+  const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate) - 1;
+
   return (
     <div
       style={{
         gridColumnStart: gridStartColumn,
-        gridColumnEnd: gridStartColumn + totalDate,
+        gridColumnEnd: gridEndColumn,
         gridRow: order,
         backgroundColor: '#33ccff',
         color: '#ffffff'
