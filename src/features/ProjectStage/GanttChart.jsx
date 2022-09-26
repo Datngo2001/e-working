@@ -4,6 +4,7 @@ import StageDate from './components/StageDate/StageDate';
 import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
 import { dateDiffInDays } from '../../util/date';
 import styles from './ganttChart.module.css';
+import DateRow from './components/DateRow/DateRow';
 
 function GanttChart() {
   let projectStartDate;
@@ -41,17 +42,20 @@ function GanttChart() {
       <div
         style={{
           display: 'grid',
-          gridTemplateRows: 'auto',
+          gridTemplateRows: `30px 30px repeat(${stages?.length}, 50px )`,
           gridTemplateColumns: `repeat(${totalDate}, 20px )`,
           overflow: 'auto',
           padding: '10px',
           height: '100%'
         }}>
+        {projectStartDate && projectEndDate && (
+          <DateRow startDate={projectStartDate} endDate={projectEndDate} />
+        )}
         {stages.map((stage, index) => (
           <StageDate
             key={stage._id}
             stage={stage}
-            order={index + 1}
+            row={index + 3}
             projectStartDate={projectStartDate}
           />
         ))}

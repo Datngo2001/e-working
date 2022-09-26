@@ -1,7 +1,7 @@
 import React from 'react';
 import { dateDiffInDays } from '../../../../util/date';
 
-function StageDate({ stage, projectStartDate, order }) {
+function StageDate({ stage, projectStartDate, row }) {
   const gridStartColumn = dateDiffInDays(projectStartDate, stage.startDate) + 1;
   const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate) - 1;
 
@@ -10,7 +10,7 @@ function StageDate({ stage, projectStartDate, order }) {
       style={{
         gridColumnStart: gridStartColumn,
         gridColumnEnd: gridEndColumn,
-        gridRow: order,
+        gridRow: row,
         backgroundColor: '#33ccff',
         color: '#ffffff',
         margin: '5px',
