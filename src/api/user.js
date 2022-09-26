@@ -1,5 +1,4 @@
 import api from "./";
-import store from '../store'
 
 export function getProfile(id) {
     return api.get(`user/${id}`);
