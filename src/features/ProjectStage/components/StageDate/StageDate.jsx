@@ -12,7 +12,10 @@ function StageDate({ stage, projectStartDate, order }) {
         gridColumnEnd: gridEndColumn,
         gridRow: order,
         backgroundColor: '#33ccff',
-        color: '#ffffff'
+        color: '#ffffff',
+        margin: '5px',
+        padding: '5px',
+        borderRadius: '5px'
       }}>
       {stage.name}
     </div>

@@ -14,7 +14,7 @@ function ProjectStagePage() {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <GanttChart projectId={id} />
     </div>
   );

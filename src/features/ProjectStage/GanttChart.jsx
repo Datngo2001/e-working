@@ -41,9 +41,11 @@ function GanttChart() {
       <div
         style={{
           display: 'grid',
-          gridTemplateRows: '30px',
+          gridTemplateRows: 'auto',
           gridTemplateColumns: `repeat(${totalDate}, 20px )`,
-          overflow: 'auto'
+          overflow: 'auto',
+          padding: '10px',
+          height: '100%'
         }}>
         {stages.map((stage, index) => (
           <StageDate
