@@ -4,11 +4,13 @@ import NavButton from '../NavButton/NavButton';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import styles from './sideBar.module.css';
+import ProjectName from '../ProjectName/ProjectName';
 
 function SideBar() {
   const { currentProject } = useSelector((state) => state.project);
   return (
     <div className={styles['container']}>
+      <ProjectName />
       <NavButton to={`/console/project/${currentProject?._id}/stage`}>
         <DashboardIcon fontSize="inherit" />
         Stage

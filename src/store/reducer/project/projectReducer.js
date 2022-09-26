@@ -1,4 +1,4 @@
-import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS } from "./projectActionTypes";
+import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS } from "./projectActionTypes";
 
 const init = {
     newProject: null,
@@ -13,6 +13,7 @@ const init = {
 
 export default function projectReducer(state = init, { type, payload }) {
     switch (type) {
+        case LOAD_PROJECT_REQUEST:
         case CREATE_PROJECT_REQUEST:
         case MY_PROJECT_REQUEST:
             return {
@@ -23,6 +24,7 @@ export default function projectReducer(state = init, { type, payload }) {
                     message: null
                 }
             }
+        case LOAD_PROJECT_FAILURE:
         case CREATE_PROJECT_FAILURE:
         case MY_PROJECT_FAILURE:
             return {
@@ -36,7 +38,6 @@ export default function projectReducer(state = init, { type, payload }) {
         case CREATE_PROJECT_SUCCESS:
             return {
                 ...state,
-                newProject: null,
                 currentProject: payload,
                 projectList: [...state.projectList, payload],
                 loading: false,
@@ -49,6 +50,16 @@ export default function projectReducer(state = init, { type, payload }) {
             return {
                 ...state,
                 projectList: payload,
+                loading: false,
+                error: {
+                    action: "",
+                    message: null
+                }
+            }
+        case LOAD_PROJECT_SUCCESS:
+            return {
+                ...state,
+                currentProject: payload,
                 loading: false,
                 error: {
                     action: "",
