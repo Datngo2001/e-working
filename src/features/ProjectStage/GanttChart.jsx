@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import StageDate from './components/StageDate/StageDate';
 import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
 import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
+import Stage from './components/Stage/Stage';
 
 function GanttChart() {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function GanttChart() {
         }}>
         <DateRow />
         {stages.map((stage, index) => (
-          <StageDate key={stage._id} stage={stage} order={index} />
+          <Stage key={stage._id} stage={stage} order={index} />
         ))}
       </div>
     </div>

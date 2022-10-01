@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { dateDiffInDays } from '../../../../util/date';
 
-function StageDate({ stage, order }) {
+function Stage({ stage, order }) {
   const {
     ganttChart: { stageRowAt, startColumnAt, startDate }
   } = useSelector((state) => state.stage);
@@ -27,4 +27,4 @@ function StageDate({ stage, order }) {
   );
 }
 
-export default StageDate;
+export default Stage;
