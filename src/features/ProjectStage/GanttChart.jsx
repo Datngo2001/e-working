@@ -2,34 +2,16 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import StageDate from './components/StageDate/StageDate';
 import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
-import { dateDiffInDays } from '../../util/date';
 import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
 
 function GanttChart() {
-  let projectStartDate;
-  let projectEndDate;
-  let totalDate;
-
-  const { currentProject } = useSelector((state) => state.project);
   const dispatch = useDispatch();
-  const { stages } = useSelector((state) => state.stage);
-
-  projectStartDate = stages[0]?.startDate;
-  stages.forEach((stage) => {
-    if (stage.startDate < projectStartDate) {
-      projectStartDate = stage.startDate;
-    }
-  });
-
-  projectEndDate = stages[0]?.endDate;
-  stages.forEach((stage) => {
-    if (stage.endDate > projectEndDate) {
-      projectEndDate = stage.endDate;
-    }
-  });
-
-  totalDate = dateDiffInDays(projectEndDate, projectStartDate);
+  const { currentProject } = useSelector((state) => state.project);
+  const {
+    stages,
+    ganttChart: { totalDate }
+  } = useSelector((state) => state.stage);
 
   useEffect(() => {
     if (currentProject) {
@@ -42,22 +24,15 @@ function GanttChart() {
       <div
         style={{
           display: 'grid',
-          gridTemplateRows: `30px 30px repeat(${stages?.length}, 50px )`,
-          gridTemplateColumns: `repeat(${totalDate}, 20px )`,
+          gridTemplateRows: `35px 25px repeat(${stages?.length}, 45px )`,
+          gridTemplateColumns: `repeat(${totalDate + 1}, 30px )`,
           overflow: 'auto',
           padding: '10px',
           height: '100%'
         }}>
-        {projectStartDate && projectEndDate && (
-          <DateRow startDate={projectStartDate} endDate={projectEndDate} />
-        )}
+        <DateRow />
         {stages.map((stage, index) => (
-          <StageDate
-            key={stage._id}
-            stage={stage}
-            row={index + 3}
-            projectStartDate={projectStartDate}
-          />
+          <StageDate key={stage._id} stage={stage} order={index} />
         ))}
       </div>
     </div>

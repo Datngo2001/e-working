@@ -1,19 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { dateDiffInDays } from '../../../../util/date';
 
-function StageDate({ stage, projectStartDate, row }) {
-  const gridStartColumn = dateDiffInDays(projectStartDate, stage.startDate) + 1;
-  const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate) - 1;
+function StageDate({ stage, order }) {
+  const {
+    ganttChart: { stageRowAt, startColumnAt, startDate }
+  } = useSelector((state) => state.stage);
+
+  const gridStartColumn = startColumnAt + dateDiffInDays(startDate, stage.startDate);
+  const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate);
 
   return (
     <div
       style={{
+        gridRow: stageRowAt + order,
         gridColumnStart: gridStartColumn,
         gridColumnEnd: gridEndColumn,
-        gridRow: row,
         backgroundColor: '#33ccff',
         color: '#ffffff',
-        margin: '5px',
+        margin: '5px 0px',
         padding: '5px',
         borderRadius: '5px'
       }}>

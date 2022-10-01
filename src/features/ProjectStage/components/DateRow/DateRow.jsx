@@ -1,4 +1,6 @@
 import React from 'react';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const monthNames = [
   'Jan',
@@ -14,51 +16,98 @@ const monthNames = [
   'Nov',
   'Dec'
 ];
-function DateRow({ startDate, endDate }) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  let months = new Set();
-  let monthStartColumns = new Set([1]);
-  const dates = [];
+function DateRow() {
+  const {
+    ganttChart: { dateRowAt, startColumnAt, startDate, endDate }
+  } = useSelector((state) => state.stage);
 
-  let i = 1;
-  while (start < end) {
-    months.add(monthNames[start.getMonth()]);
-    dates.push(start.getDate());
-    if (start.getDate() === 1) {
-      monthStartColumns.add(i);
+  const weeks = useMemo(() => {
+    const result = [];
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    let week = {
+      month: '',
+      dates: [],
+      start: null,
+      end: null
+    };
+    let i = startColumnAt;
+
+    while (start <= end) {
+      week.dates.push(start.getDate());
+
+      let month = monthNames[start.getMonth()];
+      if (week.month == '') {
+        week.month = month;
+      } else if (!week.month.includes(month)) {
+        week.month += '-' + month;
+      }
+
+      //on Monday
+      if (start.getDay() == 1 || !week.start) {
+        week.start = i;
+      }
+
+      //on Sunday
+      if (start.getDay() == 0) {
+        week.end = i + 1;
+        result.push({ ...week });
+        week = {
+          month: '',
+          dates: [],
+          start: null,
+          end: null
+        };
+      }
+
+      start.setDate(start.getDate() + 1);
+      i++;
     }
-    start.setDate(start.getDate() + 1);
-    i++;
-  }
-
-  months = Array.from(months);
-  monthStartColumns = Array.from(monthStartColumns);
+    return result;
+  }, [startDate, endDate]);
 
   return (
     <>
-      {months.map((month, index) => (
-        <div
-          key={month}
-          style={{
-            gridRow: 1,
-            gridColumnStart: monthStartColumns[index],
-            gridColumnEnd: monthStartColumns[index + 1] - 1
-          }}>
-          {month}
-        </div>
-      ))}
-      {dates.map((date) => (
-        <div
-          key={date}
-          style={{
-            gridRow: 2
-          }}>
-          {date}
-        </div>
+      {weeks.map((week, i) => (
+        <>
+          <div
+            key={`week${i}`}
+            style={{
+              gridRow: dateRowAt,
+              gridColumnStart: week.start,
+              gridColumnEnd: week.end,
+              textAlign: 'center',
+              borderRight: '1px solid #f2f2f2',
+              borderLeft: '1px solid #f2f2f2',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <div>{week.month}</div>
+          </div>
+          {week.dates.map((date, j) => (
+            <div
+              key={`week${i}_date${j}`}
+              style={{
+                gridRow: dateRowAt + 1,
+                gridColumnStart: week.start + j,
+                backgroundColor: '#f2f2f2',
+                width: '90%',
+                margin: 'auto',
+                borderRadius: '5px',
+                fontSize: '0.7rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+              <div>{date}</div>
+            </div>
+          ))}
+        </>
       ))}
     </>
   );
 }
 
-export default React.memo(DateRow);
+export default DateRow;
