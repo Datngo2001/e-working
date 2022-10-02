@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
+import { CLEAR_STAGES, LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
 import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
 import Stage from './components/Stage/Stage';
 import Today from './components/Today/Today';
 
-function GanttChart() {
+function GanttChart({ projectId }) {
   const dispatch = useDispatch();
-  const { currentProject } = useSelector((state) => state.project);
   const {
     stages,
     ganttChart: { totalDate }
   } = useSelector((state) => state.stage);
 
   useEffect(() => {
-    if (currentProject) {
-      dispatch({ type: LOAD_STAGE_REQUEST, payload: currentProject._id });
-    }
-  }, [currentProject?._id]);
+    dispatch({ type: LOAD_STAGE_REQUEST, payload: projectId });
+    return () => {
+      dispatch({ type: CLEAR_STAGES });
+    };
+  }, [projectId]);
 
   return (
     <div className={styles['container']}>

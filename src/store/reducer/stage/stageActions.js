@@ -6,6 +6,7 @@ import { dateDiffInDays } from "../../../util/date"
 export function* loadAllProjectStage({ payload }) {
     try {
         const res = yield call(getAllProjectStage, payload)
+
         const stages = res.data.map(stage => {
             stage.startDate = new Date(stage.startDate);
             stage.endDate = new Date(stage.endDate);
@@ -26,8 +27,14 @@ export function* loadAllProjectStage({ payload }) {
             }
         });
 
-        startDate = new Date(startDate)
-        endDate = new Date(endDate)
+        if (stages.length == 0) {
+            startDate = new Date()
+            endDate = new Date()
+        } else {
+            startDate = new Date(startDate)
+            endDate = new Date(endDate)
+        }
+
         startDate.setFullYear(startDate.getFullYear() - 1)
         endDate.setFullYear(endDate.getFullYear() + 1)
 

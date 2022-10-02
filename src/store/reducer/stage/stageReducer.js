@@ -1,4 +1,4 @@
-import { LOAD_STAGE_FAILURE, LOAD_STAGE_REQUEST, LOAD_STAGE_SUCCESS } from "./stageActionTypes"
+import { CLEAR_STAGES, LOAD_STAGE_FAILURE, LOAD_STAGE_REQUEST, LOAD_STAGE_SUCCESS } from "./stageActionTypes"
 
 const init = {
     ganttChart: {
@@ -24,6 +24,8 @@ export default function stageReducer(state = init, { type, payload }) {
         case LOAD_STAGE_REQUEST:
             return {
                 ...state,
+                stages: [],
+                currentStage: null,
                 loading: true,
                 error: {
                     action: "",
@@ -58,7 +60,8 @@ export default function stageReducer(state = init, { type, payload }) {
                     message: null
                 }
             }
-
+        case CLEAR_STAGES:
+            return { ...init }
         default:
             return state
     }
