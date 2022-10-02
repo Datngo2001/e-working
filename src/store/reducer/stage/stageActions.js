@@ -26,10 +26,10 @@ export function* loadAllProjectStage({ payload }) {
             }
         });
 
-        if (!startDate && !endDate) {
-            startDate = new Date()
-            endDate = new Date()
-        }
+        startDate = new Date(startDate)
+        endDate = new Date(endDate)
+        startDate.setFullYear(startDate.getFullYear() - 1)
+        endDate.setFullYear(endDate.getFullYear() + 1)
 
         while (startDate.getDay() != 1) {
             startDate.setDate(startDate.getDate() - 1);

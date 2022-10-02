@@ -18,7 +18,8 @@ const monthNames = [
 ];
 function DateRow() {
   const {
-    ganttChart: { dateRowAt, startColumnAt, startDate, endDate }
+    stages,
+    ganttChart: { dateRowAt, startColumnAt, startDate, endDate, stageRowAt }
   } = useSelector((state) => state.stage);
 
   const weeks = useMemo(() => {
@@ -39,9 +40,9 @@ function DateRow() {
 
       let month = monthNames[start.getMonth()];
       if (week.month == '') {
-        week.month = month;
+        week.month = `${month} '${start.getFullYear()}`;
       } else if (!week.month.includes(month)) {
-        week.month += '-' + month;
+        week.month += ` - ${month} '${start.getFullYear()}`;
       }
 
       //on Monday
@@ -73,17 +74,16 @@ function DateRow() {
         <div
           key={i}
           style={{
-            gridRow: dateRowAt,
+            gridRowStart: dateRowAt,
+            gridRowEnd: stageRowAt + stages.length + 1,
             gridColumnStart: week.start,
             gridColumnEnd: week.end,
             textAlign: 'center',
             borderRight: '1px solid #f2f2f2',
             borderLeft: '1px solid #f2f2f2',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
+            paddingTop: '5px'
           }}>
-          <div>{week.month}</div>
+          {week.month}
         </div>
       ))}
       {weeks.map((week) =>

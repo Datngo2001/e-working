@@ -4,6 +4,7 @@ import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
 import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
 import Stage from './components/Stage/Stage';
+import Today from './components/Today/Today';
 
 function GanttChart() {
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ function GanttChart() {
       <div
         style={{
           display: 'grid',
-          gridTemplateRows: `35px 25px repeat(${stages?.length}, 45px )`,
-          gridTemplateColumns: `repeat(${totalDate + 1}, 30px )`,
+          gridTemplateRows: `35px 25px repeat(${stages.length}, 45px) auto`,
+          gridTemplateColumns: `repeat(${totalDate + 2}, 30px )`,
           overflow: 'auto',
           padding: '10px',
           height: '100%'
@@ -34,6 +35,7 @@ function GanttChart() {
         {stages.map((stage, index) => (
           <Stage key={stage._id} stage={stage} order={index} />
         ))}
+        <Today />
       </div>
     </div>
   );
