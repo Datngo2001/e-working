@@ -3,7 +3,7 @@ import { LOAD_STAGE_FAILURE, LOAD_STAGE_REQUEST, LOAD_STAGE_SUCCESS } from "./st
 const init = {
     ganttChart: {
         mode: 'week',
-        startColumnAt: 1,
+        startColumnAt: 2,
         dateRowAt: 1,
         stageRowAt: 3,
         startDate: null,
@@ -42,7 +42,6 @@ export default function stageReducer(state = init, { type, payload }) {
                 }
             }
         case LOAD_STAGE_SUCCESS:
-            console.log(payload.ganttChart.endDate)
             return {
                 ...state,
                 loading: false,

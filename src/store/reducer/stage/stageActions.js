@@ -35,11 +35,9 @@ export function* loadAllProjectStage({ payload }) {
             startDate.setDate(startDate.getDate() - 1);
         }
 
-        console.log(endDate)
         while (endDate.getDay() != 0) {
             endDate.setDate(endDate.getDate() + 1);
         }
-        console.log(endDate)
 
         let totalDate = dateDiffInDays(endDate, startDate)
 

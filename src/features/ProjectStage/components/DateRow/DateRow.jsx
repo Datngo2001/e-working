@@ -70,42 +70,42 @@ function DateRow() {
   return (
     <>
       {weeks.map((week, i) => (
-        <>
+        <div
+          key={i}
+          style={{
+            gridRow: dateRowAt,
+            gridColumnStart: week.start,
+            gridColumnEnd: week.end,
+            textAlign: 'center',
+            borderRight: '1px solid #f2f2f2',
+            borderLeft: '1px solid #f2f2f2',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          <div>{week.month}</div>
+        </div>
+      ))}
+      {weeks.map((week) =>
+        week.dates.map((date, i) => (
           <div
-            key={`week${i}`}
+            key={`${week.month}:${date}`}
             style={{
-              gridRow: dateRowAt,
-              gridColumnStart: week.start,
-              gridColumnEnd: week.end,
-              textAlign: 'center',
-              borderRight: '1px solid #f2f2f2',
-              borderLeft: '1px solid #f2f2f2',
+              gridRow: dateRowAt + 1,
+              gridColumnStart: week.start + i,
+              backgroundColor: '#f2f2f2',
+              width: '90%',
+              margin: 'auto',
+              borderRadius: '5px',
+              fontSize: '0.7rem',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <div>{week.month}</div>
+            <div>{date}</div>
           </div>
-          {week.dates.map((date, j) => (
-            <div
-              key={`week${i}_date${j}`}
-              style={{
-                gridRow: dateRowAt + 1,
-                gridColumnStart: week.start + j,
-                backgroundColor: '#f2f2f2',
-                width: '90%',
-                margin: 'auto',
-                borderRadius: '5px',
-                fontSize: '0.7rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-              <div>{date}</div>
-            </div>
-          ))}
-        </>
-      ))}
+        ))
+      )}
     </>
   );
 }
