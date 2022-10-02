@@ -22,6 +22,8 @@ function Stage({ stage, order }) {
         <div>{stage.name}</div>
         <div className={styles['start-date']}>{convertDDMMYYYY(stage.startDate)}</div>
         <div className={styles['end-date']}>{convertDDMMYYYY(stage.endDate)}</div>
+        <button className={styles['start-button']}></button>
+        <button className={styles['end-button']}></button>
       </div>
     </div>
   );
