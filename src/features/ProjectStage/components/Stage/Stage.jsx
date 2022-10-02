@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { dateDiffInDays } from '../../../../util/date';
+import { convertDDMMYYYY, dateDiffInDays } from '../../../../util/date';
+import styles from './stage.module.css';
 
 function Stage({ stage, order }) {
   const {
@@ -15,14 +16,13 @@ function Stage({ stage, order }) {
       style={{
         gridRow: stageRowAt + order,
         gridColumnStart: gridStartColumn,
-        gridColumnEnd: gridEndColumn,
-        backgroundColor: '#33ccff',
-        color: '#ffffff',
-        margin: '5px 0px',
-        padding: '5px',
-        borderRadius: '5px'
+        gridColumnEnd: gridEndColumn
       }}>
-      {stage.name}
+      <div className={styles['stage']}>
+        <div>{stage.name}</div>
+        <div className={styles['start-date']}>{convertDDMMYYYY(stage.startDate)}</div>
+        <div className={styles['end-date']}>{convertDDMMYYYY(stage.endDate)}</div>
+      </div>
     </div>
   );
 }
