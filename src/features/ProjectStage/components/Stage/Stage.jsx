@@ -19,7 +19,8 @@ function Stage({ stage, order }) {
         gridColumnEnd: gridEndColumn,
         height: '100%',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        zIndex: 1
       }}>
       <div className={styles['stage']}>
         <div className={styles['start-date']}>{convertDDMMYYYY(stage.startDate)}</div>

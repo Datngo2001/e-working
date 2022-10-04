@@ -15,7 +15,7 @@ function StageList() {
           gridRowEnd: stageRowAt + stages.length + 1,
           position: 'sticky',
           left: 0,
-          zIndex: 2,
+          zIndex: 3,
           backgroundColor: '#ffffff',
           border: '2px solid #f2f2f2',
           borderTop: 'none',
@@ -28,7 +28,7 @@ function StageList() {
             gridRow: stageRowAt + i,
             position: 'sticky',
             left: 0,
-            zIndex: 2,
+            zIndex: 3,
             backgroundColor: '#ffffff',
             border: '2px solid #f2f2f2',
             borderLeft: 'none',
@@ -38,6 +38,19 @@ function StageList() {
           {stage.name}
         </div>
       ))}
+      <div
+        style={{
+          gridColumn: 1,
+          gridRow: stageRowAt + stages.length,
+          position: 'sticky',
+          left: 0,
+          zIndex: 3,
+          backgroundColor: '#ffffff',
+          border: '2px solid #f2f2f2',
+          borderLeft: 'none'
+        }}>
+        + Create new stage
+      </div>
     </>
   );
 }

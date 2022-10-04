@@ -25,7 +25,7 @@ function Today() {
         gridColumnStart: column,
         gridRowStart: stageRowAt,
         gridRowEnd: stageRowAt + stages.length + 1,
-        zIndex: 1
+        zIndex: 2
       }}>
       <div
         style={{
