@@ -5,6 +5,7 @@ import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
 import Stage from './components/Stage/Stage';
 import Today from './components/Today/Today';
+import StageList from './components/StageList/StageList';
 
 function GanttChart({ projectId }) {
   const dispatch = useDispatch();
@@ -26,11 +27,13 @@ function GanttChart({ projectId }) {
         style={{
           display: 'grid',
           gridTemplateRows: `35px 25px repeat(${stages.length}, 45px) auto`,
-          gridTemplateColumns: `repeat(${totalDate + 2}, 30px )`,
+          gridTemplateColumns: `300px repeat(${totalDate + 1}, 30px )`,
           overflow: 'auto',
-          padding: '10px',
-          height: '100%'
+          height: '100%',
+          position: 'relative',
+          padding: '10px 0px 0px 0px'
         }}>
+        <StageList />
         <DateRow />
         {stages.map((stage, index) => (
           <Stage key={stage._id} stage={stage} order={index} />

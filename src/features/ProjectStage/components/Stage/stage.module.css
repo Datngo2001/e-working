@@ -1,10 +1,12 @@
 .stage {
+  flex-grow: 1;
   background-color: #33ccff;
   color: #ffffff;
   margin: 5px 0px;
   padding: 5px 30px;
   border-radius: 5px;
   position: relative;
+  height: 60%;
 }
 
 .start-date,

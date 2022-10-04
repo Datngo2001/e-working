@@ -8,7 +8,7 @@ function Stage({ stage, order }) {
     ganttChart: { stageRowAt, startColumnAt, startDate }
   } = useSelector((state) => state.stage);
 
-  const gridStartColumn = startColumnAt + dateDiffInDays(startDate, stage.startDate);
+  const gridStartColumn = startColumnAt + dateDiffInDays(stage.startDate, startDate);
   const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate);
 
   return (
@@ -16,10 +16,12 @@ function Stage({ stage, order }) {
       style={{
         gridRow: stageRowAt + order,
         gridColumnStart: gridStartColumn,
-        gridColumnEnd: gridEndColumn
+        gridColumnEnd: gridEndColumn,
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center'
       }}>
       <div className={styles['stage']}>
-        <div>{stage.name}</div>
         <div className={styles['start-date']}>{convertDDMMYYYY(stage.startDate)}</div>
         <div className={styles['end-date']}>{convertDDMMYYYY(stage.endDate)}</div>
         <button className={styles['start-button']}></button>

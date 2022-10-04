@@ -81,7 +81,8 @@ function DateRow() {
             textAlign: 'center',
             borderRight: '1px solid #f2f2f2',
             borderLeft: '1px solid #f2f2f2',
-            paddingTop: '5px'
+            paddingTop: '5px',
+            position: 'sticky'
           }}>
           {week.month}
         </div>
@@ -100,7 +101,8 @@ function DateRow() {
               fontSize: '0.7rem',
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              position: 'sticky'
             }}>
             <div>{date}</div>
           </div>
