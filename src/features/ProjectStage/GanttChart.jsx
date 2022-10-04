@@ -5,13 +5,13 @@ import styles from './ganttChart.module.css';
 import DateRow from './components/DateRow/DateRow';
 import Stage from './components/Stage/Stage';
 import Today from './components/Today/Today';
-import StageList from './components/StageList/StageList';
+import StageItem from './components/StageItem/StageItem';
 
 function GanttChart({ projectId }) {
   const dispatch = useDispatch();
   const {
     stages,
-    ganttChart: { totalDate }
+    ganttChart: { totalDate, stageRowAt }
   } = useSelector((state) => state.stage);
 
   useEffect(() => {
@@ -33,10 +33,20 @@ function GanttChart({ projectId }) {
           position: 'relative',
           padding: '10px 0px 0px 0px'
         }}>
-        <StageList />
         <DateRow />
         {stages.map((stage, index) => (
-          <Stage key={stage._id} stage={stage} order={index} />
+          <div key={stage._id} className={styles['stage-row']}>
+            <StageItem stage={stage} row={stageRowAt + index} />
+            <Stage stage={stage} row={stageRowAt + index} />
+            <div
+              style={{
+                backgroundColor: 'inherit',
+                gridRow: stageRowAt + index,
+                gridColumnStart: 1,
+                gridColumnEnd: totalDate + 3,
+                height: '100%'
+              }}></div>
+          </div>
         ))}
         <Today />
       </div>

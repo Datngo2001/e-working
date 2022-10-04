@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { convertDDMMYYYY, dateDiffInDays } from '../../../../util/date';
 import styles from './stage.module.css';
 
-function Stage({ stage, order }) {
+function Stage({ stage, row }) {
   const {
-    ganttChart: { stageRowAt, startColumnAt, startDate }
+    ganttChart: { startColumnAt, startDate }
   } = useSelector((state) => state.stage);
 
   const gridStartColumn = startColumnAt + dateDiffInDays(stage.startDate, startDate);
@@ -14,7 +14,7 @@ function Stage({ stage, order }) {
   return (
     <div
       style={{
-        gridRow: stageRowAt + order,
+        gridRow: row,
         gridColumnStart: gridStartColumn,
         gridColumnEnd: gridEndColumn,
         height: '100%',
