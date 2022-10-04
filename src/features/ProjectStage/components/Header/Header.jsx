@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import styles from './header.module.css';
 
 const monthNames = [
   'Jan',
@@ -16,10 +17,11 @@ const monthNames = [
   'Nov',
   'Dec'
 ];
-function DateRow() {
+
+function Header() {
   const {
     stages,
-    ganttChart: { dateRowAt, startColumnAt, startDate, endDate, stageRowAt }
+    ganttChart: { dateRowAt, stageRowAt, startColumnAt, startDate, endDate }
   } = useSelector((state) => state.stage);
 
   const weeks = useMemo(() => {
@@ -69,47 +71,46 @@ function DateRow() {
   }, [startDate, endDate]);
 
   return (
-    <>
+    <div className={styles['header']}>
       {weeks.map((week, i) => (
-        <div
-          key={i}
-          style={{
-            gridRowStart: dateRowAt,
-            gridRowEnd: stageRowAt + stages.length + 1,
-            gridColumnStart: week.start,
-            gridColumnEnd: week.end,
-            textAlign: 'center',
-            borderRight: '1px solid #f2f2f2',
-            borderLeft: '1px solid #f2f2f2',
-            paddingTop: '5px',
-            position: 'sticky'
-          }}>
-          {week.month}
-        </div>
-      ))}
-      {weeks.map((week) =>
-        week.dates.map((date, i) => (
+        <div key={i} className={styles['week']}>
           <div
-            key={`${week.month}:${date}`}
             style={{
-              gridRow: dateRowAt + 1,
-              gridColumnStart: week.start + i,
-              backgroundColor: '#f2f2f2',
-              width: '90%',
-              margin: 'auto',
-              borderRadius: '5px',
-              fontSize: '0.7rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              gridRowStart: dateRowAt,
+              gridRowEnd: stageRowAt + stages.length + 1,
+              gridColumnStart: week.start,
+              gridColumnEnd: week.end,
+              textAlign: 'center',
+              borderRight: '1px solid #f2f2f2',
+              borderLeft: '1px solid #f2f2f2',
+              paddingTop: '5px',
               position: 'sticky'
             }}>
-            <div>{date}</div>
+            {week.month}
           </div>
-        ))
-      )}
-    </>
+          {week.dates.map((date, j) => (
+            <div
+              key={`${week.month}:${date}`}
+              style={{
+                gridRow: dateRowAt + 1,
+                gridColumnStart: week.start + j,
+                backgroundColor: '#f2f2f2',
+                width: '90%',
+                margin: 'auto',
+                borderRadius: '5px',
+                fontSize: '0.7rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'sticky'
+              }}>
+              <div>{date}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
-export default DateRow;
+export default Header;
