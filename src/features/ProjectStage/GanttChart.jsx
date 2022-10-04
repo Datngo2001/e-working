@@ -24,7 +24,7 @@ function GanttChart({ projectId }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateRows: `35px 25px repeat(${stages.length}, 45px) auto`,
+          gridTemplateRows: `35px 25px repeat(${stages.length}, 45px)`,
           gridTemplateColumns: `300px repeat(${totalDate + 1}, 30px )`,
           overflow: 'auto',
           height: '100%',

@@ -72,37 +72,59 @@ function Header() {
 
   return (
     <div className={styles['header']}>
+      <div
+        style={{
+          position: 'sticky',
+          left: 0,
+          gridRowStart: 1,
+          gridRowEnd: stageRowAt,
+          gridColumn: 1,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'inherit',
+          borderRight: '2px solid #dfe1e6',
+          borderBottom: '1px solid #dfe1e6',
+          zIndex: 1
+        }}></div>
       {weeks.map((week, i) => (
         <div key={i} className={styles['week']}>
+          <div
+            style={{
+              gridRowStart: dateRowAt,
+              gridRowEnd: dateRowAt + 2,
+              gridColumnStart: week.start,
+              gridColumnEnd: week.end,
+              textAlign: 'center',
+              borderRight: '1px solid #dfe1e6',
+              borderLeft: '1px solid #dfe1e6',
+              paddingTop: '5px',
+              backgroundColor: 'inherit'
+            }}>
+            {week.month}
+          </div>
           <div
             style={{
               gridRowStart: dateRowAt,
               gridRowEnd: stageRowAt + stages.length + 1,
               gridColumnStart: week.start,
               gridColumnEnd: week.end,
-              textAlign: 'center',
-              borderRight: '1px solid #f2f2f2',
-              borderLeft: '1px solid #f2f2f2',
-              paddingTop: '5px',
-              position: 'sticky'
-            }}>
-            {week.month}
-          </div>
+              height: '100%',
+              borderRight: '1px solid #dfe1e6',
+              borderLeft: '1px solid #dfe1e6',
+              zIndex: 0
+            }}></div>
           {week.dates.map((date, j) => (
             <div
               key={`${week.month}:${date}`}
               style={{
                 gridRow: dateRowAt + 1,
                 gridColumnStart: week.start + j,
-                backgroundColor: '#f2f2f2',
                 width: '90%',
                 margin: 'auto',
-                borderRadius: '5px',
                 fontSize: '0.7rem',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
-                position: 'sticky'
+                alignItems: 'center'
               }}>
               <div>{date}</div>
             </div>

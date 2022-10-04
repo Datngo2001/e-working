@@ -9,7 +9,8 @@ function StageItem({ stage, row }) {
         position: 'sticky',
         left: 0,
         zIndex: 3,
-        backgroundColor: 'inherit'
+        backgroundColor: 'inherit',
+        borderRight: '2px solid #dfe1e6'
       }}
       key={stage._id}>
       {stage.name}
