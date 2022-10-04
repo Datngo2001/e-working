@@ -2,11 +2,19 @@
   height: 100%;
 }
 
-.stage-row {
+.all-stages {
   display: contents;
-  background-color: #ffff;
 }
 
-.stage-row:hover {
+.stage-row {
+  display: contents;
+}
+.stage-row:nth-child(2n) {
   background-color: #f2f2f2;
+}
+.stage-row:nth-child(2n + 1) {
+  background-color: #ffffff;
+}
+.stage-row:hover {
+  background-color: #e6e6e6;
 }
