@@ -9,7 +9,7 @@ function Stage({ stage, row }) {
   } = useSelector((state) => state.stage);
 
   const gridStartColumn = startColumnAt + dateDiffInDays(stage.startDate, startDate);
-  const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate);
+  const gridEndColumn = gridStartColumn + dateDiffInDays(stage.endDate, stage.startDate) + 1;
 
   return (
     <div
