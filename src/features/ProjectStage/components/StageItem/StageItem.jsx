@@ -10,9 +10,12 @@ function StageItem({ stage, row }) {
         left: 0,
         zIndex: 3,
         backgroundColor: 'inherit',
-        borderRight: '2px solid #dfe1e6'
+        borderRight: '2px solid #dfe1e6',
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: '8px'
       }}>
-      {stage.name}
+      <div>{stage.name}</div>
     </div>
   );
 }
