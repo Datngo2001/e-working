@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import CreateStage from '../CreateStage/CreateStage';
 import Stage from '../Stage/Stage';
 import StageItem from '../StageItem/StageItem';
 import styles from './body.module.css';
@@ -13,7 +14,7 @@ function Body() {
   return (
     <div className={styles['body']}>
       {stages.map((stage, index) => (
-        <div key={stage._id} className={styles['stage-row']}>
+        <div key={stage._id} className={styles['row']}>
           <StageItem stage={stage} row={stageRowAt + index} />
           <Stage stage={stage} row={stageRowAt + index} />
           <div
@@ -26,11 +27,23 @@ function Body() {
             }}></div>
         </div>
       ))}
+
+      <div className={styles['row']}>
+        <CreateStage row={stageRowAt + stages.length} />
+        <div
+          style={{
+            backgroundColor: 'inherit',
+            gridRow: stageRowAt + stages.length,
+            gridColumnStart: 1,
+            gridColumnEnd: totalDate + 3,
+            height: '100%'
+          }}></div>
+      </div>
       <div
         style={{
           position: 'sticky',
           left: 0,
-          gridRowStart: stageRowAt + stages.length,
+          gridRowStart: stageRowAt + stages.length + 1,
           gridRowEnd: 'auto',
           gridColumn: 1,
           width: '100%',

@@ -105,7 +105,7 @@ function Header() {
           <div
             style={{
               gridRowStart: dateRowAt,
-              gridRowEnd: stageRowAt + stages.length + 1,
+              gridRowEnd: stageRowAt + stages.length + 2,
               gridColumnStart: week.start,
               gridColumnEnd: week.end,
               height: '100%',

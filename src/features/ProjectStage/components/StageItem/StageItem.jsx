@@ -11,8 +11,7 @@ function StageItem({ stage, row }) {
         zIndex: 3,
         backgroundColor: 'inherit',
         borderRight: '2px solid #dfe1e6'
-      }}
-      key={stage._id}>
+      }}>
       {stage.name}
     </div>
   );
