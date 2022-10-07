@@ -13,7 +13,7 @@ function SideBar() {
       <ProjectName />
       <NavButton to={`/console/project/${currentProject?._id}/stage`}>
         <DashboardIcon fontSize="inherit" />
-        Stage
+        RoadMap
       </NavButton>
       <NavButton to={`/console/project/${currentProject?._id}/board`}>
         <AlignHorizontalLeftIcon fontSize="inherit" />

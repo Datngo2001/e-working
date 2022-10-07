@@ -1,7 +1,6 @@
 import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS } from "./projectActionTypes";
 
 const init = {
-    newProject: null,
     projectList: [],
     currentProject: null,
     loading: false,

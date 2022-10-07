@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { LOAD_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
+import GanttChart from '../../features/ProjectStage/GanttChart';
 
 function ProjectStagePage() {
   const { id } = useParams();
@@ -11,11 +12,11 @@ function ProjectStagePage() {
 
   useEffect(() => {
     dispatch({ type: LOAD_PROJECT_REQUEST, payload: id });
-  }, [id, currentProject?._id]);
+  }, []);
 
   return (
-    <div>
-      <h1>Project Stage</h1>
+    <div style={{ height: '100%' }}>
+      {currentProject?._id == id && <GanttChart projectId={id} />}
     </div>
   );
 }
