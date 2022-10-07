@@ -1,10 +1,10 @@
+import { Button, IconButton, TextField } from "@mui/material";
 import React, { useState } from "react";
-
-import { X } from "react-feather";
+import CloseIcon from '@mui/icons-material/Close';
 
 import "./Editable.css";
 
-function Editable(props) {
+function EditableField(props) {
   const [isEditable, setIsEditable] = useState(false);
   const [inputText, setInputText] = useState(props.defaultValue || "");
 
@@ -24,7 +24,7 @@ function Editable(props) {
           className={`editable_edit ${props.editClass ? props.editClass : ""}`}
           onSubmit={submission}
         >
-          <input
+          <TextField
             type="text"
             value={inputText}
             placeholder={props.placeholder || props.text}
@@ -32,15 +32,16 @@ function Editable(props) {
             autoFocus
           />
           <div className="editable_edit_footer">
-            <button type="submit">{props.buttonText || "Add"}</button>
-            <X onClick={() => setIsEditable(false)} className="closeIcon" />
+            <Button variant="outlined" type="submit">{props.buttonText || "Add"}</Button>
+            <IconButton onClick={() => setIsEditable(false)} >
+              <CloseIcon />
+            </IconButton>
           </div>
         </form>
       ) : (
         <p
-          className={`editable_display ${
-            props.displayClass ? props.displayClass : ""
-          }`}
+          className={`editable_display ${props.displayClass ? props.displayClass : ""
+            }`}
           onClick={() => setIsEditable(true)}
         >
           {props.text}
@@ -50,4 +51,4 @@ function Editable(props) {
   );
 }
 
-export default Editable;
+export default EditableField;

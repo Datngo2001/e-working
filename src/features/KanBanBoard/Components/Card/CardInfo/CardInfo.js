@@ -10,7 +10,7 @@ import {
 } from "react-feather";
 
 import Modal from "../../Modal/Modal";
-import Editable from "../../Editabled/Editable";
+import EditableField from "../../EditableField/EditableField";
 
 import "./CardInfo.css";
 
@@ -121,7 +121,7 @@ function CardInfo(props) {
             <Type />
             <p>Title</p>
           </div>
-          <Editable
+          <EditableField
             defaultValue={values.title}
             text={values.title}
             placeholder="Enter Title"
@@ -134,7 +134,7 @@ function CardInfo(props) {
             <List />
             <p>Description</p>
           </div>
-          <Editable
+          <EditableField
             defaultValue={values.desc}
             text={values.desc || "Add a Description"}
             placeholder="Enter description"
@@ -181,7 +181,7 @@ function CardInfo(props) {
               />
             ))}
           </ul>
-          <Editable
+          <EditableField
             text="Add Label"
             placeholder="Enter label text"
             onSubmit={(value) =>
@@ -219,7 +219,7 @@ function CardInfo(props) {
               </div>
             ))}
           </div>
-          <Editable
+          <EditableField
             text={"Add a Task"}
             placeholder="Enter task"
             onSubmit={addTask}

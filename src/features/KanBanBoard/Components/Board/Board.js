@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { MoreHorizontal } from "react-feather";
-
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Card from "../Card/Card";
 import Dropdown from "../Dropdown/Dropdown";
-import Editable from "../Editabled/Editable";
+import EditableField from "../EditableField/EditableField";
 
 import "./Board.css";
+import { IconButton } from "@mui/material";
 
 function Board(props) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -17,11 +17,8 @@ function Board(props) {
           {props.board?.title}
           <span>{props.board?.cards?.length || 0}</span>
         </p>
-        <div
-          className="board_header_title_more"
-          onClick={() => setShowDropdown(true)}
-        >
-          <MoreHorizontal />
+        <div className="board_header_title_more">
+          <IconButton onClick={() => setShowDropdown(true)}><MoreHorizIcon /></IconButton>
           {showDropdown && (
             <Dropdown
               class="board_dropdown"
@@ -44,7 +41,7 @@ function Board(props) {
             updateCard={props.updateCard}
           />
         ))}
-        <Editable
+        <EditableField
           text="+ Add Card"
           placeholder="Enter Card Title"
           displayClass="board_add-card"

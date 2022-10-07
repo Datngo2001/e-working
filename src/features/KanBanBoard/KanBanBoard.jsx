@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Board from './Components/Board/Board';
 
 import './KanBanBoard.css';
-import Editable from './Components/Editabled/Editable';
+import EditableField from './Components/EditableField/EditableField';
 
 function KanBanBoard() {
   const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('prac-kanban')) || []);
@@ -129,7 +129,7 @@ function KanBanBoard() {
         />
       ))}
       <div className="app_boards_last">
-        <Editable
+        <EditableField
           displayClass="app_boards_add-board"
           editClass="app_boards_add-board_edit"
           placeholder="Enter Board Name"
