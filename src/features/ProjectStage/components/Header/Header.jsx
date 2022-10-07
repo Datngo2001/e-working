@@ -69,7 +69,6 @@ function Header() {
     }
     return result;
   }, [startDate, endDate]);
-  console.log(stages.length);
   return (
     <div className={styles['header']}>
       <div
