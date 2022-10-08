@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Card from "../Card/Card";
-import Dropdown from "../Dropdown/Dropdown";
-import EditableField from "../EditableField/EditableField";
+import Card from '../Card/Card';
+import Dropdown from '../Dropdown/Dropdown';
+import EditableField from '../EditableField/EditableField';
 
-import "./Board.css";
-import { IconButton } from "@mui/material";
+import './Board.css';
+import { IconButton } from '@mui/material';
 
 function Board(props) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,12 +18,11 @@ function Board(props) {
           <span>{props.board?.cards?.length || 0}</span>
         </p>
         <div className="board_header_title_more">
-          <IconButton onClick={() => setShowDropdown(true)}><MoreHorizIcon /></IconButton>
+          <IconButton onClick={() => setShowDropdown(true)}>
+            <MoreHorizIcon />
+          </IconButton>
           {showDropdown && (
-            <Dropdown
-              class="board_dropdown"
-              onClose={() => setShowDropdown(false)}
-            >
+            <Dropdown class="board_dropdown" onClose={() => setShowDropdown(false)}>
               <p onClick={() => props.removeBoard()}>Delete Board</p>
             </Dropdown>
           )}

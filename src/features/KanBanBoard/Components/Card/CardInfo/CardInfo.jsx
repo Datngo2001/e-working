@@ -9,9 +9,8 @@ import {
   X,
 } from "react-feather";
 
-import Modal from "../../Modal/Modal";
 import EditableField from "../../EditableField/EditableField";
-
+import BasicModal from '../../../../../components/modal/BasicModal/BasicModal'
 import "./CardInfo.css";
 
 function CardInfo(props) {
@@ -114,7 +113,7 @@ function CardInfo(props) {
   }, [values]);
 
   return (
-    <Modal onClose={props.onClose}>
+    <BasicModal onClose={props.onClose}>
       <div className="cardinfo">
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
@@ -226,7 +225,7 @@ function CardInfo(props) {
           />
         </div>
       </div>
-    </Modal>
+    </BasicModal>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Board from './Components/Board/Board';
 
-import './KanBanBoard.css';
+import styles from './kanBanBoard.module.css';
 import EditableField from './Components/EditableField/EditableField';
 
 function KanBanBoard() {
@@ -115,7 +115,7 @@ function KanBanBoard() {
   }, [boards]);
 
   return (
-    <div className="app_boards">
+    <div className={styles['boards']}>
       {boards.map((item) => (
         <Board
           key={item.id}
@@ -128,10 +128,8 @@ function KanBanBoard() {
           updateCard={updateCard}
         />
       ))}
-      <div className="app_boards_last">
+      <div className={styles['add-button']}>
         <EditableField
-          displayClass="app_boards_add-board"
-          editClass="app_boards_add-board_edit"
           placeholder="Enter Board Name"
           text="Add Board"
           buttonText="Add Board"
