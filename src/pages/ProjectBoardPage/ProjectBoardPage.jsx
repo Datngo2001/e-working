@@ -15,7 +15,7 @@ function ProjectBoardPage() {
   }, []);
 
   return (
-    <div style={{ height: '100%' }}>
+    <div className="custom-scroll" style={{ height: '100%' }}>
       {currentProject?._id == id && <KanBanBoard projectId={id} />}
     </div>
   );

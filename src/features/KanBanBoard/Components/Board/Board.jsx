@@ -4,31 +4,31 @@ import Card from '../Card/Card';
 import Dropdown from '../Dropdown/Dropdown';
 import EditableField from '../EditableField/EditableField';
 
-import './Board.css';
+import styles from './board.module.css';
 import { IconButton } from '@mui/material';
 
 function Board(props) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className="board">
-      <div className="board_header">
-        <p className="board_header_title">
+    <div className={styles['board']}>
+      <div className={styles['header']}>
+        <p className={styles['title']}>
           {props.board?.title}
           <span>{props.board?.cards?.length || 0}</span>
         </p>
-        <div className="board_header_title_more">
+        <div className={styles['more']}>
           <IconButton onClick={() => setShowDropdown(true)}>
             <MoreHorizIcon />
           </IconButton>
           {showDropdown && (
-            <Dropdown class="board_dropdown" onClose={() => setShowDropdown(false)}>
+            <Dropdown onClose={() => setShowDropdown(false)}>
               <p onClick={() => props.removeBoard()}>Delete Board</p>
             </Dropdown>
           )}
         </div>
       </div>
-      <div className="board_cards custom-scroll">
+      <div className={`${styles['cards']} custom-scroll`}>
         {props.board?.cards?.map((item) => (
           <Card
             key={item.id}
@@ -43,8 +43,6 @@ function Board(props) {
         <EditableField
           text="+ Add Card"
           placeholder="Enter Card Title"
-          displayClass="board_add-card"
-          editClass="board_add-card_edit"
           onSubmit={(value) => props.addCard(props.board?.id, value)}
         />
       </div>

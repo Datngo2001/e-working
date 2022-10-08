@@ -8,13 +8,13 @@
   gap: 20px;
 }
 
-.board_header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.board_header_title {
+.header .title {
   font-weight: bold;
   font-size: 1rem;
   display: flex;
@@ -22,27 +22,16 @@
   align-items: center;
 }
 
-.board_header_title span {
+.header .title span {
   color: rgb(145, 145, 145);
 }
 
-.board_header_title_more {
+.header .title .more {
   cursor: pointer;
   position: relative;
 }
 
-.board_dropdown {
-  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.12);
-  padding: 20px;
-  width: 150px !important;
-  cursor: default;
-}
-.board_dropdown p {
-  border-bottom: 1px solid #f8f8f8;
-  cursor: pointer;
-}
-
-.board_cards {
+.cards {
   background-color: #f8f8f8;
   padding: 10px;
   border-radius: 5px;
@@ -52,7 +41,7 @@
   overflow-y: auto;
 }
 
-.board_add-card {
+.add-card {
   background-color: #fff;
   color: #000;
   border-radius: 10px;
@@ -60,7 +49,7 @@
   width: 100%;
   text-align: center;
 }
-.board_add-card_edit {
+.add-card_edit {
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
