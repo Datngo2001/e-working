@@ -1,12 +1,16 @@
 import React from 'react';
+import { useRef } from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-// import { STAGE_STARTDATE_UPDATE_REQUEST } from '../../../../store/reducer/stage/stageActionTypes';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  STAGE_STARTDATE_UPDATE_REQUEST,
+  STAGE_ENDDATE_UPDATE_REQUEST
+} from '../../../../store/reducer/stage/stageActionTypes';
 import { convertDDMMYYYY, dateDiffInDays } from '../../../../util/date';
 import styles from './stage.module.css';
 
 function Stage({ stage, row }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {
     ganttChart: { startColumnAt, startDate }
   } = useSelector((state) => state.stage);
@@ -18,58 +22,87 @@ function Stage({ stage, row }) {
     startColumn + dateDiffInDays(stage.endDate, stage.startDate) + 1
   );
 
-  const handleStartDrag = () => {
-    let X = null;
-    return (e) => {
-      if (X == null) {
-        X = e.pageX;
-        return;
-      }
+  const startPos = useRef(null);
+  const endPos = useRef(null);
+  const [startDateTemp, setStartDateTemp] = useState(new Date(stage.startDate));
+  const [endDateTemp, setEndDateTemp] = useState(new Date(stage.endDate));
 
-      if (e.pageX == 0) return;
+  const handleStartDrag = (e) => {
+    if (startPos.current == null) {
+      startPos.current = e.pageX;
+      return;
+    }
 
-      // to right
-      if (e.pageX - X > 30) {
-        setStartColumn((val) => val + 1);
+    if (e.pageX == 0) return;
 
-        stage.startDate.setDate(stage.startDate.getDate() + 1);
-        // dispatch({
-        //   type: STAGE_STARTDATE_UPDATE_REQUEST,
-        //   payload: { id: stage._id, date: stage.startDate }
-        // });
-      }
-      // to left
-      if (e.pageX - X < -30) {
-        setStartColumn((val) => val - 1);
+    // to right
+    if (e.pageX - startPos.current > 30) {
+      setStartColumn((val) => val + 1);
 
-        stage.startDate.setDate(stage.startDate.getDate() - 1);
-        // dispatch({
-        //   type: STAGE_STARTDATE_UPDATE_REQUEST,
-        //   payload: { id: stage._id, date: stage.startDate }
-        // });
-      }
-    };
+      setStartDateTemp((val) => {
+        val.setDate(val.getDate() + 1);
+        return val;
+      });
+
+      startPos.current = e.pageX;
+    }
+    // to left
+    if (e.pageX - startPos.current < -30) {
+      setStartColumn((val) => val - 1);
+
+      setStartDateTemp((val) => {
+        val.setDate(val.getDate() - 1);
+        return val;
+      });
+
+      startPos.current = e.pageX;
+    }
   };
 
-  const handleEndDrag = () => {
-    let X = null;
-    return (e) => {
-      if (X == null) {
-        X = e.pageX;
-        return;
-      }
+  const handleEndDrag = (e) => {
+    if (endPos.current == null) {
+      endPos.current = e.pageX;
+      return;
+    }
 
-      if (e.pageX == 0) return;
+    if (e.pageX == 0) return;
 
-      // to right
-      if (e.pageX - X > 30) {
-        setEndColumn((val) => val + 1);
-      }
-      // to left
-      if (e.pageX - X < -30) {
-        setEndColumn((val) => val - 1);
-      }
-    };
+    // to right
+    if (e.pageX - endPos.current > 30) {
+      setEndColumn((val) => val + 1);
+
+      setEndDateTemp((val) => {
+        val.setDate(val.getDate() + 1);
+        return val;
+      });
+
+      endPos.current = e.pageX;
+    }
+    // to left
+    if (e.pageX - endPos.current < -30) {
+      setEndColumn((val) => val - 1);
+
+      setEndDateTemp((val) => {
+        val.setDate(val.getDate() - 1);
+        return val;
+      });
+
+      endPos.current = e.pageX;
+    }
+  };
+
+  const handleStartDragDone = () => {
+    dispatch({
+      type: STAGE_STARTDATE_UPDATE_REQUEST,
+      payload: { id: stage._id, date: startDateTemp }
+    });
+  };
+
+  const handleEndDragDone = () => {
+    dispatch({
+      type: STAGE_ENDDATE_UPDATE_REQUEST,
+      payload: { id: stage._id, date: endDateTemp }
+    });
   };
 
   return (
@@ -84,13 +117,18 @@ function Stage({ stage, row }) {
         zIndex: 1
       }}>
       <div className={styles['stage']}>
-        <div className={styles['start-date']}>{convertDDMMYYYY(stage.startDate)}</div>
-        <div className={styles['end-date']}>{convertDDMMYYYY(stage.endDate)}</div>
+        <div className={styles['start-date']}>{convertDDMMYYYY(startDateTemp)}</div>
+        <div className={styles['end-date']}>{convertDDMMYYYY(endDateTemp)}</div>
         <button
           className={styles['start-button']}
-          onDragCapture={handleStartDrag()}
+          onDragCapture={handleStartDrag}
+          onDragEnd={handleStartDragDone}
           draggable></button>
-        <button className={styles['end-button']} onDragCapture={handleEndDrag()} draggable></button>
+        <button
+          className={styles['end-button']}
+          onDragCapture={handleEndDrag}
+          onDragEnd={handleEndDragDone}
+          draggable></button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { LOAD_STAGE_FAILURE, LOAD_STAGE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
-import { getAllProjectStage, updateStartDate } from '../../../api/stage'
+import { LOAD_STAGE_FAILURE, LOAD_STAGE_SUCCESS, STAGE_ENDDATE_UPDATE_FAILURE, STAGE_ENDDATE_UPDATE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
+import { getAllProjectStage, updateEndDate, updateStartDate } from '../../../api/stage'
 import { call, put } from "redux-saga/effects"
 import { dateDiffInDays } from "../../../util/date"
 
@@ -71,6 +71,22 @@ export function* updateStageStartDate({ payload }) {
     } catch (error) {
         yield put({
             type: STAGE_STARTDATE_UPDATE_FAILURE,
+            payload: error
+        })
+    }
+}
+
+export function* updateStageEndDate({ payload }) {
+    try {
+        const res = yield call(updateEndDate, payload.id, payload.date)
+
+        yield put({
+            type: STAGE_ENDDATE_UPDATE_SUCCESS,
+            payload: res.data
+        })
+    } catch (error) {
+        yield put({
+            type: STAGE_ENDDATE_UPDATE_FAILURE,
             payload: error
         })
     }
