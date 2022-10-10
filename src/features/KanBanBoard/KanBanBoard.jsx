@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Board from './Components/Board/Board';
 
 import styles from './kanBanBoard.module.css';
-import EditableField from './Components/EditableField/EditableField';
+
+import EditableField from '../../components/EditableField/EditableField';
 
 function KanBanBoard() {
   const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('prac-kanban')) || []);

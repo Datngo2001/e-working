@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Card from '../Card/Card';
 import Dropdown from '../Dropdown/Dropdown';
-import EditableField from '../EditableField/EditableField';
+import EditableField from '../../../../components/EditableField/EditableField';
 
 import styles from './board.module.css';
 import { IconButton } from '@mui/material';
