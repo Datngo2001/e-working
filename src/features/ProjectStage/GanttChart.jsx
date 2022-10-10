@@ -22,6 +22,7 @@ function GanttChart({ projectId }) {
   return (
     <div style={{ height: '100%' }}>
       <div
+        className="custom-scroll"
         style={{
           display: 'grid',
           gridTemplateRows: `35px 25px repeat(${stages.length + 1}, 45px) auto`,
