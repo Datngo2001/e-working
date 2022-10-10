@@ -1,8 +1,10 @@
 .container {
   width: 100%;
+  position: relative;
 }
 
 .button {
+  position: absolute;
   padding: 6px 12px;
   border-radius: 3px;
   background-color: #eee;
