@@ -2,10 +2,10 @@ import { Button, IconButton, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
-import styles from './editableField.module.css';
+import styles from './createButton.module.css';
 
-function EditableField({ defaultValue, onSubmit, placeholder, text, buttonText }) {
-  const [isEditable, setIsEditable] = useState(false);
+function CreateButton({ defaultValue, onSubmit, placeholder, buttonText }) {
+  const [isCreatable, setIsCreatable] = useState(false);
   const [inputText, setInputText] = useState(defaultValue || '');
 
   const submission = (e) => {
@@ -14,17 +14,17 @@ function EditableField({ defaultValue, onSubmit, placeholder, text, buttonText }
       setInputText('');
       onSubmit(inputText);
     }
-    setIsEditable(false);
+    setIsCreatable(false);
   };
 
   return (
-    <div className={styles['editable']}>
-      {isEditable ? (
-        <form onSubmit={submission}>
+    <div className={styles['container']}>
+      {isCreatable ? (
+        <form onSubmit={submission} className={styles['form']}>
           <TextField
             type="text"
             value={inputText}
-            placeholder={placeholder || text}
+            placeholder={placeholder}
             onChange={(event) => setInputText(event.target.value)}
             autoFocus
           />
@@ -32,18 +32,18 @@ function EditableField({ defaultValue, onSubmit, placeholder, text, buttonText }
             <Button variant="outlined" type="submit">
               {buttonText || 'Add'}
             </Button>
-            <IconButton onClick={() => setIsEditable(false)}>
+            <IconButton onClick={() => setIsCreatable(false)}>
               <CloseIcon />
             </IconButton>
           </div>
         </form>
       ) : (
-        <p className={styles['display']} onClick={() => setIsEditable(true)}>
-          {text}
-        </p>
+        <Button className={styles['button']} onClick={() => setIsCreatable(true)}>
+          {buttonText}
+        </Button>
       )}
     </div>
   );
 }
 
-export default EditableField;
+export default CreateButton;

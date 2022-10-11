@@ -1,4 +1,4 @@
-import { CLEAR_STAGES, LOAD_STAGE_FAILURE, LOAD_STAGE_REQUEST, LOAD_STAGE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_REQUEST, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
+import { CLEAR_STAGES, LOAD_STAGE_FAILURE, LOAD_STAGE_REQUEST, LOAD_STAGE_SUCCESS, STAGE_ENDDATE_UPDATE_FAILURE, STAGE_ENDDATE_UPDATE_REQUEST, STAGE_ENDDATE_UPDATE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_REQUEST, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
 
 const init = {
     ganttChart: {
@@ -33,6 +33,7 @@ export default function stageReducer(state = init, { type, payload }) {
                 }
             }
         case STAGE_STARTDATE_UPDATE_REQUEST:
+        case STAGE_ENDDATE_UPDATE_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -43,6 +44,7 @@ export default function stageReducer(state = init, { type, payload }) {
             }
         case LOAD_STAGE_FAILURE:
         case STAGE_STARTDATE_UPDATE_FAILURE:
+        case STAGE_ENDDATE_UPDATE_FAILURE:
             return {
                 ...state,
                 stages: [],
@@ -71,6 +73,7 @@ export default function stageReducer(state = init, { type, payload }) {
                 }
             }
         case STAGE_STARTDATE_UPDATE_SUCCESS:
+        case STAGE_ENDDATE_UPDATE_SUCCESS:
             return {
                 ...state,
                 stages: updateStageInStore(state.stages, payload),

@@ -16,7 +16,7 @@ function Today() {
       behavior: 'auto',
       inline: 'center'
     });
-  });
+  }, [column]);
 
   return (
     <div

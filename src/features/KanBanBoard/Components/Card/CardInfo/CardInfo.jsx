@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, CheckSquare, List, Tag, Trash, Type, X } from 'react-feather';
 
-import EditableField from '../../EditableField/EditableField';
+import EditableField from '../../../../../components/EditableField/EditableField';
 import BasicModal from '../../../../../components/modal/BasicModal/BasicModal';
 import styles from './cardInfo.module.css';
 

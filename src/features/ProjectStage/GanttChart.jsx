@@ -42,4 +42,4 @@ function GanttChart({ projectId }) {
   );
 }
 
-export default GanttChart;
+export default React.memo(GanttChart);
