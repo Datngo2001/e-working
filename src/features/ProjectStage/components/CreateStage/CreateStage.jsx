@@ -3,9 +3,19 @@ import React from 'react';
 import { useState } from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch, useSelector } from 'react-redux';
+import { CREATE_STAGE_REQUEST } from '../../../../store/reducer/stage/stageActionTypes';
 
 function CreateStage({ row }) {
+  const dispatch = useDispatch();
+  const { currentProject } = useSelector((state) => state.project);
+  const { stages } = useSelector((state) => state.stage);
   const [isShowForm, setIsShowForm] = useState(false);
+  const [stageName, setStageName] = useState('');
+
+  const handleChange = (e) => {
+    setStageName(e.target.value);
+  };
 
   const handleCreateClick = () => {
     setIsShowForm(true);
@@ -13,6 +23,22 @@ function CreateStage({ row }) {
 
   const handleClose = () => {
     setIsShowForm(false);
+  };
+
+  const handleCreate = () => {
+    const startDate = stages[stages.length - 1].endDate;
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 5);
+    dispatch({
+      type: CREATE_STAGE_REQUEST,
+      payload: {
+        project: currentProject,
+        name: stageName,
+        startDate: startDate,
+        endDate: endDate
+      }
+    });
+    setStageName('');
   };
 
   return (
@@ -29,8 +55,8 @@ function CreateStage({ row }) {
         alignItems: 'center'
       }}>
       {isShowForm ? (
-        <div style={{ display: 'flex', position: 'relative', backgroundColor: '#f2f2f2' }}>
-          <TextField size="small" />
+        <div style={{ display: 'flex', position: 'relative', backgroundColor: '#fff' }}>
+          <TextField variant="outlined" size="small" value={stageName} onChange={handleChange} />
           <div
             style={{
               position: 'absolute',
@@ -39,10 +65,18 @@ function CreateStage({ row }) {
               transform: 'translateY(100%)',
               display: 'flex'
             }}>
-            <IconButton size="small">
+            <IconButton
+              variant="outlined"
+              size="small"
+              sx={{ backgroundColor: '#fff' }}
+              onClick={handleCreate}>
               <CheckIcon />
             </IconButton>
-            <IconButton size="small" onClick={handleClose}>
+            <IconButton
+              variant="outlined"
+              size="small"
+              sx={{ backgroundColor: '#fff' }}
+              onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           </div>

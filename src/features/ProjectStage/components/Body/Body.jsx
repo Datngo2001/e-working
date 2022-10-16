@@ -39,6 +39,8 @@ function Body() {
             height: '100%'
           }}></div>
       </div>
+
+      {/* Stage placeholder */}
       <div
         style={{
           position: 'sticky',
