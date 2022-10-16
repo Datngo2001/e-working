@@ -15,3 +15,7 @@ export function updateEndDate(id, date) {
 export function createStage(data) {
     return api.post(`stage`, data)
 }
+
+export function deleteStage(id) {
+    return api.delete(`stage/${id}`)
+}

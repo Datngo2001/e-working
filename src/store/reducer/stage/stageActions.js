@@ -1,5 +1,5 @@
-import { CREATE_STAGE_FAILURE, CREATE_STAGE_SUCCESS, LOAD_STAGE_FAILURE, LOAD_STAGE_SUCCESS, STAGE_ENDDATE_UPDATE_FAILURE, STAGE_ENDDATE_UPDATE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
-import { createStage, getAllProjectStage, updateEndDate, updateStartDate } from '../../../api/stage'
+import { DELETE_STAGE_SUCCESS, DELETE_STAGE_FAILURE, CREATE_STAGE_FAILURE, CREATE_STAGE_SUCCESS, LOAD_STAGE_FAILURE, LOAD_STAGE_SUCCESS, STAGE_ENDDATE_UPDATE_FAILURE, STAGE_ENDDATE_UPDATE_SUCCESS, STAGE_STARTDATE_UPDATE_FAILURE, STAGE_STARTDATE_UPDATE_SUCCESS } from "./stageActionTypes"
+import { createStage, deleteStage, getAllProjectStage, updateEndDate, updateStartDate } from '../../../api/stage'
 import { call, put } from "redux-saga/effects"
 import { dateDiffInDays } from "../../../util/date"
 
@@ -107,6 +107,22 @@ export function* createNewStage({ payload }) {
     } catch (error) {
         yield put({
             type: CREATE_STAGE_FAILURE,
+            payload: error
+        })
+    }
+}
+
+export function* removeStage({ payload }) {
+    try {
+        yield call(deleteStage, payload)
+
+        yield put({
+            type: DELETE_STAGE_SUCCESS,
+            payload: payload
+        })
+    } catch (error) {
+        yield put({
+            type: DELETE_STAGE_FAILURE,
             payload: error
         })
     }
