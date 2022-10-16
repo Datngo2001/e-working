@@ -56,7 +56,7 @@ function CreateStage({ row }) {
       }}>
       {isShowForm ? (
         <div style={{ display: 'flex', position: 'relative', backgroundColor: '#fff' }}>
-          <TextField size="small" value={stageName} onChange={handleChange} />
+          <TextField variant="outlined" size="small" value={stageName} onChange={handleChange} />
           <div
             style={{
               position: 'absolute',

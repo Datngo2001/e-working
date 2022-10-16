@@ -4,6 +4,10 @@ export function getAllProjectStage(projectId) {
     return api.get(`stage/project/${projectId}/all`)
 }
 
+export function updateStageName(id, name) {
+    return api.put(`stage/${id}`, { name: name })
+}
+
 export function updateStartDate(id, date) {
     return api.put(`stage/${id}`, { startDate: date })
 }
