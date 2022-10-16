@@ -9,7 +9,7 @@ function Today() {
   } = useSelector((state) => state.stage);
   const todayRef = useRef();
 
-  const column = startColumnAt + dateDiffInDays(Date.now(), startDate) - 1;
+  const column = startColumnAt + dateDiffInDays(Date.now(), startDate);
 
   useEffect(() => {
     todayRef.current.scrollIntoView({
@@ -25,16 +25,12 @@ function Today() {
         gridColumnStart: column,
         gridRowStart: stageRowAt,
         gridRowEnd: stageRowAt + stages.length + 2,
-        zIndex: 2
-      }}>
-      <div
-        style={{
-          width: '5px',
-          height: '100%',
-          backgroundColor: '#FF991F',
-          margin: 'auto'
-        }}></div>
-    </div>
+        zIndex: 2,
+        width: '3px',
+        height: '100%',
+        backgroundColor: '#FF991F',
+        transform: 'translateX(13px)'
+      }}></div>
   );
 }
 
