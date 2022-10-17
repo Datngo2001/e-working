@@ -29,8 +29,7 @@ function GanttChart({ projectId }) {
           gridTemplateColumns: `300px repeat(${totalDate + 1}, 30px )`,
           overflow: 'auto',
           height: '100%',
-          position: 'relative',
-          padding: '10px 0px 0px 0px'
+          position: 'relative'
         }}>
         <Header />
 
