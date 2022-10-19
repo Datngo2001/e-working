@@ -1,7 +1,8 @@
-import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS, UPDATE_PROJECT_FAILURE, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS } from "./projectActionTypes";
+import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_MEMBERS_FAILURE, LOAD_PROJECT_MEMBERS_REQUEST, LOAD_PROJECT_MEMBERS_SUCCESS, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS, UPDATE_PROJECT_FAILURE, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS } from "./projectActionTypes";
 
 const init = {
     projectList: [],
+    members: [],
     currentProject: null,
     loading: false,
     error: {
@@ -12,6 +13,7 @@ const init = {
 
 export default function projectReducer(state = init, { type, payload }) {
     switch (type) {
+        case LOAD_PROJECT_MEMBERS_REQUEST:
         case UPDATE_PROJECT_REQUEST:
         case LOAD_PROJECT_REQUEST:
         case CREATE_PROJECT_REQUEST:
@@ -24,6 +26,7 @@ export default function projectReducer(state = init, { type, payload }) {
                     message: null
                 }
             }
+        case LOAD_PROJECT_MEMBERS_FAILURE:
         case UPDATE_PROJECT_FAILURE:
         case LOAD_PROJECT_FAILURE:
         case CREATE_PROJECT_FAILURE:
@@ -68,10 +71,19 @@ export default function projectReducer(state = init, { type, payload }) {
                 }
             }
         case UPDATE_PROJECT_SUCCESS:
-            console.log(payload)
             return {
                 ...state,
                 currentProject: payload,
+                loading: false,
+                error: {
+                    action: "",
+                    message: null
+                }
+            }
+        case LOAD_PROJECT_MEMBERS_SUCCESS:
+            return {
+                ...state,
+                members: payload,
                 loading: false,
                 error: {
                     action: "",

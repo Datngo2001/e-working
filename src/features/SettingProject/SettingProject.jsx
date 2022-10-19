@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SettingField from './SettingField/SettingField';
 import { UPDATE_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
 import { useCallback } from 'react';
+import ManageAccess from './ManageAccess/ManageAccess';
 
 function SettingProject() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function SettingProject() {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '30px' }}>
-      <Paper elevation={3} sx={{ padding: 2 }}>
+      <Paper elevation={3} sx={{ padding: 2, marginBottom: 3 }}>
         <Stack spacing={1}>
           <SettingField
             title={'Project Name: '}
@@ -29,6 +30,9 @@ function SettingProject() {
             edittable
           />
         </Stack>
+      </Paper>
+      <Paper elevation={3} sx={{ padding: 2 }}>
+        <ManageAccess />
       </Paper>
     </Container>
   );
