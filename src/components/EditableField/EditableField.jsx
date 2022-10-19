@@ -1,12 +1,13 @@
-import { Button, IconButton, TextField } from '@mui/material';
+import { Box, IconButton, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-
+import CreateIcon from '@mui/icons-material/Create';
+import CheckIcon from '@mui/icons-material/Check';
 import styles from './editableField.module.css';
 
-function EditableField({ defaultValue, onSubmit, placeholder, text, buttonText }) {
+function EditableField({ onSubmit, placeholder, value }) {
   const [isEditable, setIsEditable] = useState(false);
-  const [inputText, setInputText] = useState(defaultValue || '');
+  const [inputText, setInputText] = useState(value || '');
 
   const submission = (e) => {
     e.preventDefault();
@@ -18,31 +19,36 @@ function EditableField({ defaultValue, onSubmit, placeholder, text, buttonText }
   };
 
   return (
-    <div className={styles['editable']}>
+    <Box>
       {isEditable ? (
         <form onSubmit={submission} className={styles['edit']}>
-          <TextField
-            type="text"
-            value={inputText}
-            placeholder={placeholder || text}
-            onChange={(event) => setInputText(event.target.value)}
-            autoFocus
-          />
-          <div className={styles['footer']}>
-            <Button variant="outlined" type="submit">
-              {buttonText || 'Add'}
-            </Button>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <TextField
+              sx={{ flexGrow: 1 }}
+              type="text"
+              size="small"
+              value={inputText}
+              placeholder={placeholder || value}
+              onChange={(event) => setInputText(event.target.value)}
+              autoFocus
+            />
+            <IconButton variant="outlined" color="primary" type="submit">
+              <CheckIcon />
+            </IconButton>
             <IconButton onClick={() => setIsEditable(false)}>
               <CloseIcon />
             </IconButton>
-          </div>
+          </Box>
         </form>
       ) : (
-        <p className={styles['display']} onClick={() => setIsEditable(true)}>
-          {text}
-        </p>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography sx={{ flexGrow: 1 }}>{value}</Typography>
+          <IconButton onClick={() => setIsEditable(true)}>
+            <CreateIcon />
+          </IconButton>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

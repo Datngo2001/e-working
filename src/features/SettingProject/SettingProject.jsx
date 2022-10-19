@@ -1,13 +1,34 @@
-import { Paper } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import { Container } from '@mui/system';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SettingField from './SettingField/SettingField';
+import { UPDATE_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
+import { useCallback } from 'react';
 
 function SettingProject() {
+  const dispatch = useDispatch();
+  const { currentProject } = useSelector((state) => state.project);
+
+  const handleNameChange = useCallback((name, value) => {
+    dispatch({
+      type: UPDATE_PROJECT_REQUEST,
+      payload: { id: currentProject._id, data: { name: value } }
+    });
+  }, []);
+
   return (
     <Container maxWidth="md" sx={{ marginTop: '30px' }}>
-      <Paper>
-        <SettingField />
+      <Paper elevation={3} sx={{ padding: 2 }}>
+        <Stack spacing={1}>
+          <SettingField
+            title={'Project Name: '}
+            name="name"
+            value={currentProject.name}
+            onSubmit={handleNameChange}
+            edittable
+          />
+        </Stack>
       </Paper>
     </Container>
   );

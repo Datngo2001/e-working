@@ -11,3 +11,7 @@ export function getMyProject() {
 export function getProjectById(id) {
     return api.get(`/project/${id}`)
 }
+
+export function putProject(id, data) {
+    return api.put(`/project/${id}`, data)
+}
