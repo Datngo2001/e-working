@@ -7,6 +7,19 @@ import { useEffect } from 'react';
 import LandingPageLayout from './layout/LandingPageLayout/LandingPageLayout';
 import { useLocation, useNavigate } from 'react-router';
 import ConsoleLayout from './layout/ConsoleLayout/ConsoleLayout';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#039be5'
+    },
+    secondary: {
+      main: '#8777d9'
+    }
+  }
+});
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +36,11 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div>{location.pathname.includes('/console') ? <ConsoleLayout /> : <LandingPageLayout />}</div>
+    <ThemeProvider theme={theme}>
+      <div>
+        {location.pathname.includes('/console') ? <ConsoleLayout /> : <LandingPageLayout />}
+      </div>
+    </ThemeProvider>
   );
 };
 

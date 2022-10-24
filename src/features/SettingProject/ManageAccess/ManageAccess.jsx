@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Button,
-  Divider,
   IconButton,
   List,
   ListItem,
@@ -31,7 +30,7 @@ function ManageAccess() {
     <Stack>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h4>Manage Access</h4>
-        <Button size="small" variant="contained">
+        <Button size="small" variant="contained" color="secondary">
           Add Member
         </Button>
       </Box>

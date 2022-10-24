@@ -18,7 +18,7 @@ function LinkGroup({ pages }) {
         <Button
           key={page.title}
           onClick={handleLinkClick(page.link)}
-          sx={{ my: 2, color: 'white', display: 'block' }}>
+          sx={{ my: 2, display: 'block' }}>
           {page.title}
         </Button>
       ))}
