@@ -84,7 +84,10 @@ function ManageAccess() {
             <ListItemAvatar>
               <Avatar src={member.picture}></Avatar>
             </ListItemAvatar>
-            <ListItemText primary={member.email} />
+            <ListItemText
+              primary={member.email}
+              secondary={member._id == currentProject.creator ? 'Creator' : null}
+            />
           </ListItem>
         ))}
       </List>
