@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router';
 function ProjectName() {
   const navigate = useNavigate();
   const { currentProject } = useSelector((state) => state.project);
+  const { user } = useSelector((state) => state.user);
+
   return (
     <div className={styles['container']}>
       <Typography
@@ -15,9 +17,11 @@ function ProjectName() {
         sx={{ textTransform: 'capitalize', wordWrap: 'normal', marginRight: 'auto' }}>
         {currentProject?.name}
       </Typography>
-      <IconButton onClick={() => navigate(`/console/project/${currentProject?._id}/setting`)}>
-        <SettingsIcon />
-      </IconButton>
+      {currentProject?.creator == user.uid ? (
+        <IconButton onClick={() => navigate(`/console/project/${currentProject?._id}/setting`)}>
+          <SettingsIcon />
+        </IconButton>
+      ) : null}
     </div>
   );
 }

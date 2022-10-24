@@ -4,7 +4,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { MY_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
+import {
+  MY_PROJECT_REQUEST,
+  SET_CURRENT_PROJECT
+} from '../../store/reducer/project/projectActionTypes';
 import CreateProjectModal from '../CreateProject/CreateProjectModal';
 import CreateProjectButton from './components/CreateProjectButton/CreateProjectButton';
 import ProjectCard from './components/ProjectCard/ProjectCard';
@@ -30,6 +33,14 @@ function ProjectList() {
     });
   }, []);
 
+  const handleCardClick = (id) => {
+    dispatch({
+      type: SET_CURRENT_PROJECT,
+      payload: id
+    });
+    navigate(`/console/project/${id}/stage`);
+  };
+
   return (
     <div className={styles['container']}>
       <h2>Your Project</h2>
@@ -38,13 +49,7 @@ function ProjectList() {
           <CreateProjectButton />
         </Grid>
         {projectList.map((project, index) => (
-          <Grid
-            item
-            xs={12}
-            md={6}
-            lg={4}
-            key={index}
-            onClick={() => navigate(`/console/project/${project._id}/stage`)}>
+          <Grid item xs={12} md={6} lg={4} key={index} onClick={() => handleCardClick(project._id)}>
             <ProjectCard name={project.name} />
           </Grid>
         ))}
