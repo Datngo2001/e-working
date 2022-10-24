@@ -1,12 +1,14 @@
 import React from 'react';
 
-import './Modal.css';
+import styles from './modal.module.css';
 
-function BasicModal(props) {
+function BasicModal({ onClose, children }) {
   return (
-    <div className="modal" onClick={() => (props.onClose ? props.onClose() : '')}>
-      <div className="modal_content custom-scroll" onClick={(event) => event.stopPropagation()}>
-        {props.children}
+    <div className={styles['modal']} onClick={() => (onClose ? onClose() : '')}>
+      <div
+        className={styles['modal_content'] + ' ' + styles['custom-scroll']}
+        onClick={(event) => event.stopPropagation()}>
+        {children}
       </div>
     </div>
   );

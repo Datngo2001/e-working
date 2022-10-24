@@ -17,3 +17,7 @@ export function syncUser(token) {
         headers: { Authorization: `Bearer ${token}` }
     });
 }
+
+export function searchUsersByEmail(email) {
+    return api.get(`user/find-users/${email}`);
+}

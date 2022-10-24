@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
@@ -116,7 +117,7 @@ function Stage({ stage, row }) {
         alignItems: 'center',
         zIndex: 1
       }}>
-      <div className={styles['stage']}>
+      <Box sx={{ backgroundColor: 'secondary.main' }} className={styles['stage']}>
         <div className={styles['start-date']}>{convertDDMMYYYY(startDateTemp)}</div>
         <div className={styles['end-date']}>{convertDDMMYYYY(endDateTemp)}</div>
         <button
@@ -129,7 +130,7 @@ function Stage({ stage, row }) {
           onDragCapture={handleEndDrag}
           onDragEnd={handleEndDragDone}
           draggable></button>
-      </div>
+      </Box>
     </div>
   );
 }

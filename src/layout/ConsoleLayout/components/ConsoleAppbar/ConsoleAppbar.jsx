@@ -19,7 +19,7 @@ function ConsoleAppbar() {
   ];
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ boxShadow: 'none' }}>
       <div className={styles['container']}>
         <Toolbar disableGutters>
           <MenuButton pages={pages}></MenuButton>

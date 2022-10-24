@@ -28,7 +28,7 @@ function ProjectList() {
     dispatch({
       type: MY_PROJECT_REQUEST
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className={styles['container']}>

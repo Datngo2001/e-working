@@ -11,3 +11,15 @@ export function getMyProject() {
 export function getProjectById(id) {
     return api.get(`/project/${id}`)
 }
+
+export function getProjectMember(id) {
+    return api.get(`/project/${id}/members`)
+}
+
+export function putProject(id, data) {
+    return api.put(`/project/${id}`, data)
+}
+
+export function deleteProject(id) {
+    return api.delete(`/project/${id}`)
+}
