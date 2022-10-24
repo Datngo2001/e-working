@@ -6,6 +6,7 @@ import SettingField from './SettingField/SettingField';
 import { UPDATE_PROJECT_REQUEST } from '../../store/reducer/project/projectActionTypes';
 import { useCallback } from 'react';
 import ManageAccess from './ManageAccess/ManageAccess';
+import DeleteProject from './DeleteProject/DeleteProject';
 
 function SettingProject() {
   const dispatch = useDispatch();
@@ -31,8 +32,11 @@ function SettingProject() {
           />
         </Stack>
       </Paper>
-      <Paper elevation={3} sx={{ padding: 2 }}>
+      <Paper elevation={3} sx={{ padding: 2, marginBottom: 3 }}>
         <ManageAccess />
+      </Paper>
+      <Paper elevation={3} sx={{ padding: 2 }}>
+        <DeleteProject />
       </Paper>
     </Container>
   );

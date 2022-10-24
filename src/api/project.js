@@ -19,3 +19,7 @@ export function getProjectMember(id) {
 export function putProject(id, data) {
     return api.put(`/project/${id}`, data)
 }
+
+export function deleteProject(id) {
+    return api.delete(`/project/${id}`)
+}

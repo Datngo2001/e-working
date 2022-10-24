@@ -1,4 +1,4 @@
-import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_MEMBERS_FAILURE, LOAD_PROJECT_MEMBERS_REQUEST, LOAD_PROJECT_MEMBERS_SUCCESS, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS, UPDATE_PROJECT_FAILURE, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS } from "./projectActionTypes";
+import { CREATE_PROJECT_FAILURE, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, DELETE_PROJECT_FAILURE, DELETE_PROJECT_REQUEST, DELETE_PROJECT_SUCCESS, LOAD_PROJECT_FAILURE, LOAD_PROJECT_MEMBERS_FAILURE, LOAD_PROJECT_MEMBERS_REQUEST, LOAD_PROJECT_MEMBERS_SUCCESS, LOAD_PROJECT_REQUEST, LOAD_PROJECT_SUCCESS, MY_PROJECT_FAILURE, MY_PROJECT_REQUEST, MY_PROJECT_SUCCESS, UPDATE_PROJECT_FAILURE, UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS } from "./projectActionTypes";
 
 const init = {
     projectList: [],
@@ -18,6 +18,7 @@ export default function projectReducer(state = init, { type, payload }) {
         case LOAD_PROJECT_REQUEST:
         case CREATE_PROJECT_REQUEST:
         case MY_PROJECT_REQUEST:
+        case DELETE_PROJECT_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -31,6 +32,7 @@ export default function projectReducer(state = init, { type, payload }) {
         case LOAD_PROJECT_FAILURE:
         case CREATE_PROJECT_FAILURE:
         case MY_PROJECT_FAILURE:
+        case DELETE_PROJECT_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -90,9 +92,27 @@ export default function projectReducer(state = init, { type, payload }) {
                     message: null
                 }
             }
+        case DELETE_PROJECT_SUCCESS:
+            return {
+                ...state,
+                projectList: removeProjectFromStore(state.projectList, payload),
+                currentProject: null,
+                members: null,
+                loading: false,
+                error: {
+                    action: "",
+                    message: null
+                }
+            }
         default:
             return state
     }
+}
+
+function removeProjectFromStore(projectList, id) {
+    var index = projectList.findIndex(stage => stage.id == id)
+    projectList.splice(index, 1)
+    return projectList
 }
 
 // function updateProjectInStore(projectList, newProject) {

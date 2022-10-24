@@ -11,7 +11,7 @@ function CreateProjectModal({ isOpen, closeModal }) {
         <CreateProjectForm
           onProjectCreated={(project) => {
             closeModal();
-            navigate(`/console/project${project._id}/stage`);
+            navigate(`/console/project/${project._id}/stage`);
           }}
         />
       </div>
