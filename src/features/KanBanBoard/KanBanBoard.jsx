@@ -6,7 +6,7 @@ import styles from './kanBanBoard.module.css';
 
 import EditableField from '../../components/EditableField/EditableField';
 
-function KanBanBoard() {
+function KanBanBoard({ projectId, satgeId }) {
   const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('prac-kanban')) || []);
 
   const [targetCard, setTargetCard] = useState({
@@ -21,6 +21,7 @@ function KanBanBoard() {
       title: name,
       cards: []
     });
+    // CREATE_BOARD_REQUEST
     setBoards(tempBoards);
   };
 
@@ -30,6 +31,7 @@ function KanBanBoard() {
 
     const tempBoards = [...boards];
     tempBoards.splice(index, 1);
+    // DELETE_BOARD_REQUEST
     setBoards(tempBoards);
   };
 
@@ -45,6 +47,7 @@ function KanBanBoard() {
       date: '',
       tasks: []
     });
+    // CREATE_CARD_REQUEST
     setBoards(tempBoards);
   };
 
@@ -59,6 +62,8 @@ function KanBanBoard() {
     if (cardIndex < 0) return;
 
     cards.splice(cardIndex, 1);
+
+    // DELETE_CARD_REQUEST
     setBoards(tempBoards);
   };
 
@@ -80,6 +85,8 @@ function KanBanBoard() {
     const sourceCard = tempBoards[s_boardIndex].cards[s_cardIndex];
     tempBoards[s_boardIndex].cards.splice(s_cardIndex, 1);
     tempBoards[t_boardIndex].cards.splice(t_cardIndex, 0, sourceCard);
+
+    // UPDATE_CARD_REQUEST
     setBoards(tempBoards);
 
     setTargetCard({
@@ -108,6 +115,7 @@ function KanBanBoard() {
 
     tempBoards[index].cards[cardIndex] = card;
 
+    // UPDATE_CARD_REQUEST
     setBoards(tempBoards);
   };
 

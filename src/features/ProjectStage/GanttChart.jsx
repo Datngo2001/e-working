@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CLEAR_STAGES, LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
+import { LOAD_STAGE_REQUEST } from '../../store/reducer/stage/stageActionTypes';
 import Today from './components/Today/Today';
 import Header from './components/Header/Header';
 import Body from './components/Body/Body';
@@ -14,9 +14,9 @@ function GanttChart({ projectId }) {
 
   useEffect(() => {
     dispatch({ type: LOAD_STAGE_REQUEST, payload: projectId });
-    return () => {
-      dispatch({ type: CLEAR_STAGES });
-    };
+    // return () => {
+    //   dispatch({ type: CLEAR_STAGES });
+    // };
   }, [projectId]);
 
   return (

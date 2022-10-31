@@ -6,17 +6,17 @@ import { LOAD_PROJECT_REQUEST } from '../../store/reducer/project/projectActionT
 import GanttChart from '../../features/ProjectStage/GanttChart';
 
 function ProjectStagePage() {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const { currentProject } = useSelector((state) => state.project);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: LOAD_PROJECT_REQUEST, payload: id });
+    dispatch({ type: LOAD_PROJECT_REQUEST, payload: projectId });
   }, []);
 
   return (
     <div style={{ height: '100%' }}>
-      {currentProject?._id == id && <GanttChart projectId={id} />}
+      {currentProject?._id == projectId && <GanttChart projectId={projectId} />}
     </div>
   );
 }

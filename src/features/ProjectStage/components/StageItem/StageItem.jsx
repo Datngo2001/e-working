@@ -1,9 +1,17 @@
-import { IconButton, ListItem, ListItemText, TextField, Tooltip } from '@mui/material';
+import {
+  IconButton,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  TextField,
+  Tooltip
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import React, { useState } from 'react';
 import styles from './stageItem.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   DELETE_STAGE_REQUEST,
   UPDATE_STAGE_NAME_REQUEST
@@ -11,12 +19,27 @@ import {
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import ConfirmModal from '../../../../components/modal/ConfirmModal';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useNavigate } from 'react-router';
+import { SET_CURRENT_STAGE } from '../../../../store/reducer/stage/stageActionTypes';
 
 function StageItem({ stage, row }) {
   const dispatch = useDispatch();
+  const { currentProject } = useSelector((state) => state.project);
+  const navigate = useNavigate();
   const [editting, setEditting] = useState(false);
   const [stageName, setStageName] = useState(stage.name);
   const [openModal, setOpenModal] = useState(false);
+  const [anchorMoreMenu, setAnchorMoreMenu] = React.useState(null);
+  const openMoreMenu = Boolean(anchorMoreMenu);
+
+  const handleMoreClick = (event) => {
+    setAnchorMoreMenu(event.currentTarget);
+  };
+  const handleMoreClose = () => {
+    setAnchorMoreMenu(null);
+  };
 
   const handleDelete = () => {
     setOpenModal(true);
@@ -83,12 +106,49 @@ function StageItem({ stage, row }) {
             <ListItemText sx={{ overflow: 'hidden' }} primary={stage.name} />
           </Tooltip>
           <div className={styles['button-group']}>
-            <IconButton edge="end" aria-label="edit" onClick={handleEdit} sx={{ marginRight: 0.5 }}>
-              <EditIcon />
+            <IconButton onClick={handleMoreClick}>
+              <MoreVertIcon />
             </IconButton>
-            <IconButton edge="end" aria-label="delete" onClick={handleDelete}>
-              <DeleteIcon />
-            </IconButton>
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorMoreMenu}
+              open={openMoreMenu}
+              onClose={handleMoreClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}>
+              <MenuItem
+                onClick={() => {
+                  handleMoreClose();
+                  handleEdit();
+                }}>
+                <EditIcon />
+                Edit
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleMoreClose();
+                  handleDelete();
+                }}>
+                <DeleteIcon />
+                Delete
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleMoreClose();
+                  navigate(`/console/project/${currentProject._id}/stage/${stage._id}/board`);
+                  dispatch({ type: SET_CURRENT_STAGE, payload: stage });
+                }}>
+                <DashboardIcon />
+                Boards
+              </MenuItem>
+            </Menu>
           </div>
         </>
       )}

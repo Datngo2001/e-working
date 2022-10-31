@@ -9,7 +9,7 @@ function Today() {
   } = useSelector((state) => state.stage);
   const todayRef = useRef();
 
-  const column = startColumnAt + dateDiffInDays(Date.now(), startDate);
+  const column = startColumnAt + dateDiffInDays(Date.now(), startDate) - 1;
 
   useEffect(() => {
     todayRef.current.scrollIntoView({
